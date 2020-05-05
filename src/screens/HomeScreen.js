@@ -6,7 +6,6 @@ import styles from "../styles";
 const HomeScreen = () => {
 	return (
 		<View>
-			<Text>HomeScreen</Text>
 			<Button
 				buttonStyle={styles.PrimaryButton}
 				textStyle={styles.PrimaryButtonText}
