@@ -1,12 +1,24 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { View, StyleSheet } from "react-native";
+import AnonymousView from "../components/AnonymousView";
 
 const BasketScreen = () => {
 	return (
-		<View>
-			<Text>BasketScreen</Text>
+		<View style={styles.container}>
+			<AnonymousView
+				title="Empty Basket"
+				subTitle="Add products from your favourites or serach screen for something specific."
+			/>
 		</View>
 	);
 };
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: "center",
+		marginHorizontal: 30,
+	},
+});
 
 export default BasketScreen;
