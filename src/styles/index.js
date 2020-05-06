@@ -29,6 +29,10 @@ export default StyleSheet.create({
 		color: "#00539F",
 		textAlign: "center",
 	},
+	Text_H3: {
+		fontSize: 24,
+		fontWeight: "bold",
+	},
 	Text_H5: {
 		fontSize: 16,
 		fontWeight: "bold",
