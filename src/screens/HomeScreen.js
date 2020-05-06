@@ -3,6 +3,7 @@ import { Text, View, StyleSheet } from "react-native";
 import AnonymousWelcomeCard from "../components/AnonymousWelcomeCard";
 import { FontAwesome5 } from "@expo/vector-icons";
 import commonStyles from "../styles";
+import ProductCardHorizontal from "../components/ProductCardHorizontal";
 
 const HomeScreen = () => {
 	return (
@@ -19,6 +20,7 @@ const HomeScreen = () => {
 					Browse all groceries
 				</Text>
 			</View>
+			{/* <ProductCard /> */}
 		</View>
 	);
 };
