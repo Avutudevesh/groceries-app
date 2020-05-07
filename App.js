@@ -7,11 +7,11 @@ import {
 	SimpleLineIcons,
 	Ionicons,
 } from "@expo/vector-icons";
-import HomeScreen from "./src/screens/HomeScreen";
 import FavouritesScreen from "./src/screens/FavouritesScreen";
 import OrdersScreen from "./src/screens/OrdersScreen";
 import BasketScreen from "./src/screens/BasketScreen";
 import SearchScreen from "./src/screens/SearchScreen";
+import HomeStack from "./src/navigation/HomeStack";
 
 const Tab = createBottomTabNavigator();
 const App = () => {
@@ -20,7 +20,7 @@ const App = () => {
 			<Tab.Navigator tabBarOptions={{ safeAreaInset: { top: "always" } }}>
 				<Tab.Screen
 					name="Home"
-					component={HomeScreen}
+					component={HomeStack}
 					options={{
 						tabBarIcon: () => (
 							<MaterialCommunityIcons name="home-outline" size={25} />

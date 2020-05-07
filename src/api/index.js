@@ -1,6 +1,7 @@
 import axios from "axios";
 import SEARCH_QUERY from "./searchQuery";
 import GET_PRODUCTS_FOR_PROMOTION_TYPE_QUERY from "./getProductsForPromotionTypeQuery";
+import TAXONOMY_SUPER_DEPARTMENT_QUERY from "./taxonomySuperDepartment";
 import keys from "../../keys";
 export default axios.create({
 	baseURL: "https://api.tesco.com/shoppingexperiencealpha",
@@ -14,4 +15,5 @@ export default axios.create({
 export const queries = {
 	SEARCH_QUERY,
 	GET_PRODUCTS_FOR_PROMOTION_TYPE_QUERY,
+	TAXONOMY_SUPER_DEPARTMENT_QUERY,
 };
