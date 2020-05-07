@@ -16,7 +16,6 @@ const SearchScreen = () => {
 				},
 			});
 			setResults(result.data.data.search.productItems);
-			console.log(result.data.data.search.productItems);
 		} catch (err) {
 			if (err.response) {
 				console.log(err.response);

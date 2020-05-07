@@ -1,25 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import mangoApi, { queries } from "../../api";
 import SuperDepartmentItem from "../../components/browse/SuperDepartmentItem";
 
-export default ({ navigation }) => {
+export default ({ route, navigation }) => {
+	const { id } = route.params;
 	const [results, setResults] = useState([]);
-	const superDepartmentApi = async () => {
+	const departmentApi = async () => {
 		try {
 			const response = await mangoApi.post("/q/", {
-				query: queries.TAXONOMY_SUPER_DEPARTMENT_QUERY,
+				query: queries.TAXONOMY_FOR_CATEGORY,
 				variables: {
 					business: "grocery",
+					categoryId: id,
 				},
 			});
-			setResults(response.data.data.taxonomy);
+			setResults(response.data.data.taxonomy[0].children);
 		} catch (err) {
 			console.log(err);
 		}
 	};
 	useEffect(() => {
-		superDepartmentApi();
+		departmentApi();
 	}, []);
 	return (
 		<View style={{ backgroundColor: "white" }}>
@@ -28,7 +30,7 @@ export default ({ navigation }) => {
 				renderItem={({ item }) => {
 					return (
 						<TouchableOpacity
-							onPress={() => navigation.navigate("Department", { id: item.id })}
+							onPress={() => navigation.navigate("Aisle", { id: item.id })}
 						>
 							<SuperDepartmentItem item={item} />
 						</TouchableOpacity>

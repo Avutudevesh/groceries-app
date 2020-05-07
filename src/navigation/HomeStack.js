@@ -17,7 +17,19 @@ export default () => {
 					headerRight: () => <ProfileHeader />,
 				}}
 			/>
-			<Stack.Screen name="Browse" component={BrowseStack} />
+			<Stack.Screen
+				name="Browse"
+				component={BrowseStack}
+				options={{
+					headerStyle: {
+						backgroundColor: "#00539F",
+					},
+					headerTintColor: "#fff",
+					headerTitleStyle: {
+						fontWeight: "bold",
+					},
+				}}
+			/>
 		</Stack.Navigator>
 	);
 };
