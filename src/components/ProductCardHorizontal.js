@@ -13,10 +13,16 @@ export default ({ product }) => {
 				style={styles.imageStyle}
 			/>
 			<View>
-				<Text>{product.title}</Text>
+				<Text
+					style={styles.productTitle}
+					numberOfLines={2}
+					ellipsizeMode="tail"
+				>
+					{product.title}
+				</Text>
 				<View>
-					<View>
-						<Text style={commonStyles.Text_H4}>£{product.price.actual}</Text>
+					<View style={styles.priceViewStyle}>
+						<Text style={commonStyles.Text_H5}>£{product.price.actual}</Text>
 						<Text
 							style={commonStyles.Text_T4}
 						>{`£${product.price.actual}/${product.price.unitOfMeasure}`}</Text>
@@ -37,19 +43,22 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		paddingVertical: 10,
 		marginVertical: 5,
-		marginHorizontal: 3,
+		marginHorizontal: 5,
+		width: 150,
+		paddingHorizontal: 10,
+		elevation: 4,
 	},
 	imageStyle: {
 		height: 100,
 		width: 100,
 		marginHorizontal: 15,
+		marginBottom: 10,
 	},
 	priceViewStyle: {
-		flexDirection: "row",
-		marginTop: 10,
+		marginVertical: 10,
 	},
 	productTitle: {
-		...commonStyles.Text_H5,
+		...commonStyles.Text_H6,
 		color: "#00539F",
 	},
 });

@@ -31,13 +31,13 @@ export default StyleSheet.create({
 	},
 	PrimaryButtonSmall: {
 		paddingVertical: 10,
-		paddingHorizontal: 40,
+		paddingHorizontal: 20,
 		marginVertical: 5,
-		marginHorizontal: 10,
 		backgroundColor: "#00539F",
 		borderRadius: 24,
 		borderWidth: 2,
 		borderColor: "#00539F",
+		width: 130,
 	},
 	Text_H3: {
 		fontSize: 24,
@@ -49,6 +49,10 @@ export default StyleSheet.create({
 	},
 	Text_H5: {
 		fontSize: 16,
+		fontWeight: "bold",
+	},
+	Text_H6: {
+		fontSize: 14,
 		fontWeight: "bold",
 	},
 	Text_T2: {
