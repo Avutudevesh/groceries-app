@@ -14,6 +14,7 @@ import BasketScreen from "./src/screens/BasketScreen";
 import SearchScreen from "./src/screens/SearchScreen";
 import HomeStack from "./src/navigation/HomeStack";
 import SignInScreen from "./src/screens/auth/SignInScreen";
+import { Provider as AuthProvider } from "./src/context/authContext";
 
 const Tab = createBottomTabNavigator();
 const BottomNavigation = () => {
@@ -108,4 +109,10 @@ const App = () => {
 		</NavigationContainer>
 	);
 };
-export default App;
+export default () => {
+	return (
+		<AuthProvider>
+			<App />
+		</AuthProvider>
+	);
+};
