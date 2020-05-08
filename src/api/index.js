@@ -9,7 +9,7 @@ import keys from "../../keys";
 export default axios.create({
 	baseURL: "https://api.tesco.com/shoppingexperiencealpha",
 	headers: {
-		region: "UK",
+		region: "MY",
 		"X-APIKEY": `${keys.APIGEE_API_KEY}`,
 		"ighs-language": "en-GB",
 	},

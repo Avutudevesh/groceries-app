@@ -14,6 +14,7 @@ export default StyleSheet.create({
 	PrimaryButtonText: {
 		color: "#fff",
 		textAlign: "center",
+		fontWeight: "bold",
 	},
 	SecondaryButton: {
 		paddingVertical: 12,
@@ -28,6 +29,7 @@ export default StyleSheet.create({
 	SecondaryButtonText: {
 		color: "#00539F",
 		textAlign: "center",
+		fontWeight: "bold",
 	},
 	PrimaryButtonSmall: {
 		paddingVertical: 10,
