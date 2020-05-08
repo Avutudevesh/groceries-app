@@ -4,7 +4,8 @@ import mangoApi, { queries } from "../../api";
 import SuperDepartmentItem from "../../components/browse/SuperDepartmentItem";
 
 export default ({ route, navigation }) => {
-	const { id } = route.params;
+	const { id, name } = route.params;
+	navigation.setOptions({ title: name });
 	const [results, setResults] = useState([]);
 	const departmentApi = async () => {
 		try {
@@ -30,7 +31,12 @@ export default ({ route, navigation }) => {
 				renderItem={({ item }) => {
 					return (
 						<TouchableOpacity
-							onPress={() => navigation.navigate("AislePLP", { id: item.id })}
+							onPress={() =>
+								navigation.navigate("AislePLP", {
+									id: item.id,
+									name: item.name,
+								})
+							}
 						>
 							<SuperDepartmentItem item={item} />
 						</TouchableOpacity>

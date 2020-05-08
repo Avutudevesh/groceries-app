@@ -4,8 +4,9 @@ import mangoApi, { queries } from "../../api";
 import SuperDepartmentItem from "../../components/browse/SuperDepartmentItem";
 
 export default ({ route, navigation }) => {
-	const { id } = route.params;
+	const { id, name } = route.params;
 	const [results, setResults] = useState([]);
+	navigation.setOptions({ title: name });
 	const departmentApi = async () => {
 		try {
 			const response = await mangoApi.post("/q/", {
@@ -30,7 +31,9 @@ export default ({ route, navigation }) => {
 				renderItem={({ item }) => {
 					return (
 						<TouchableOpacity
-							onPress={() => navigation.navigate("Aisle", { id: item.id })}
+							onPress={() =>
+								navigation.navigate("Aisle", { id: item.id, name: item.name })
+							}
 						>
 							<SuperDepartmentItem item={item} />
 						</TouchableOpacity>

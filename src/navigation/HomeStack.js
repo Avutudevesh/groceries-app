@@ -20,15 +20,7 @@ export default () => {
 			<Stack.Screen
 				name="Browse"
 				component={BrowseStack}
-				options={{
-					headerStyle: {
-						backgroundColor: "#00539F",
-					},
-					headerTintColor: "#fff",
-					headerTitleStyle: {
-						fontWeight: "bold",
-					},
-				}}
+				options={{ headerShown: false }}
 			/>
 		</Stack.Navigator>
 	);

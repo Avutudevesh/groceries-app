@@ -4,7 +4,8 @@ import mangoApi, { queries } from "../../api";
 import PLPList from "../../components/PLPList";
 
 export default ({ route, navigation }) => {
-	const { id } = route.params;
+	const { id, name } = route.params;
+	navigation.setOptions({ title: name });
 	const [results, setResults] = useState([]);
 	const categoryProductsApi = async () => {
 		try {

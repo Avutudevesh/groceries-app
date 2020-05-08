@@ -12,22 +12,55 @@ export default () => {
 			<Stack.Screen
 				name="SuperDepartment"
 				component={SuperDepartmentScreen}
-				options={{ headerShown: false }}
+				options={{
+					headerStyle: {
+						backgroundColor: "#00539F",
+					},
+					headerTintColor: "#fff",
+					headerTitleStyle: {
+						fontWeight: "bold",
+					},
+					title: "Browse",
+				}}
 			/>
 			<Stack.Screen
 				name="Department"
 				component={DepartmentScreen}
-				options={{ headerShown: false }}
+				options={{
+					headerStyle: {
+						backgroundColor: "#00539F",
+					},
+					headerTintColor: "#fff",
+					headerTitleStyle: {
+						fontWeight: "bold",
+					},
+				}}
 			/>
 			<Stack.Screen
 				name="Aisle"
 				component={AisleScreen}
-				options={{ headerShown: false }}
+				options={{
+					headerStyle: {
+						backgroundColor: "#00539F",
+					},
+					headerTintColor: "#fff",
+					headerTitleStyle: {
+						fontWeight: "bold",
+					},
+				}}
 			/>
 			<Stack.Screen
 				name="AislePLP"
 				component={AislePLPScreen}
-				options={{ headerShown: false }}
+				options={{
+					headerStyle: {
+						backgroundColor: "#00539F",
+					},
+					headerTintColor: "#fff",
+					headerTitleStyle: {
+						fontWeight: "bold",
+					},
+				}}
 			/>
 		</Stack.Navigator>
 	);
