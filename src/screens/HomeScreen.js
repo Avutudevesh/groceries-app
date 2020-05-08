@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import {
 	Text,
 	View,
@@ -9,11 +9,11 @@ import {
 import AnonymousWelcomeCard from "../components/AnonymousWelcomeCard";
 import { FontAwesome5 } from "@expo/vector-icons";
 import commonStyles from "../styles";
-import ProductCarousel from "../components/ProductCarousel";
-import mangoApi, { queries } from "../api";
 import { Context as AuthContext } from "../context/authContext";
 import FulfilmentCard from "../components/home/FulfilmentCard";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import SpecialOfferCarousel from "../components/home/SpecialOfferCarousel";
+import FavouritesCarousel from "../components/home/FavouriesCarousel";
 
 const HomeScreen = ({ navigation }) => {
 	navigation.setOptions({
@@ -29,26 +29,6 @@ const HomeScreen = ({ navigation }) => {
 		),
 	});
 	const { state } = useContext(AuthContext);
-	const [result, setResults] = useState([]);
-	const specialOfferApi = async () => {
-		try {
-			const result = await mangoApi.post("/q/", {
-				query: queries.GET_PRODUCTS_FOR_PROMOTION_TYPE_QUERY,
-				variables: {
-					promotionType: "halfprice",
-					count: 24,
-				},
-			});
-			setResults(result.data.data.promotionType.productItems);
-		} catch (err) {
-			if (err.response) {
-				console.log(err.response);
-			}
-		}
-	};
-	useEffect(() => {
-		specialOfferApi();
-	}, []);
 	return (
 		<View>
 			<ScrollView>
@@ -66,7 +46,8 @@ const HomeScreen = ({ navigation }) => {
 						</Text>
 					</View>
 				</TouchableOpacity>
-				<ProductCarousel productItems={result} />
+				{state.access_token ? <FavouritesCarousel /> : null}
+				<SpecialOfferCarousel />
 			</ScrollView>
 		</View>
 	);

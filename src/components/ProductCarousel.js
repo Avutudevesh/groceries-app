@@ -3,10 +3,10 @@ import { View, FlatList, Text, StyleSheet } from "react-native";
 import ProductCardHorizontal from "./ProductCardHorizontal";
 import commonStyles from "../styles";
 
-export default ({ productItems }) => {
+export default ({ title, productItems }) => {
 	return (
 		<View style={styles.container}>
-			<Text style={styles.title}>Special Offers</Text>
+			<Text style={styles.title}>{title}</Text>
 			<FlatList
 				horizontal
 				data={productItems}
@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
 	container: {
 		backgroundColor: "white",
 		paddingBottom: 20,
+		marginBottom: 20,
 	},
 	title: {
 		...commonStyles.Text_H4,
