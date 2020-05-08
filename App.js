@@ -16,6 +16,7 @@ import HomeStack from "./src/navigation/HomeStack";
 import SignInScreen from "./src/screens/auth/SignInScreen";
 import { Provider as AuthProvider } from "./src/context/authContext";
 import { navigationRef } from "./src/navigation/RootNavigation";
+import SplashScreen from "./src/screens/SplashScreen";
 
 const Tab = createBottomTabNavigator();
 const BottomNavigation = () => {
@@ -87,6 +88,7 @@ const Root = createStackNavigator();
 const App = () => {
 	return (
 		<Root.Navigator>
+			<Root.Screen name="SplashScreen" component={SplashScreen} />
 			<Root.Screen
 				name="BottomNavigation"
 				component={BottomNavigation}

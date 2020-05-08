@@ -39,8 +39,16 @@ const signout = (dispatch) => async () => {
 	// navigate("loginFlow");
 };
 
+const tryLocalSignIn = (dispatch) => async () => {
+	const token = await AsyncStorage.getItem("access_token");
+	if (token) {
+		dispatch({ type: "signin_success", payload: token });
+	}
+	navigate("BottomNavigation");
+};
+
 export const { Context, Provider } = createDataContext(
 	authReducer,
-	{ signin, signout },
+	{ signin, signout, tryLocalSignIn },
 	{ access_token: null }
 );

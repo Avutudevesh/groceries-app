@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
 	Text,
 	View,
@@ -11,8 +11,11 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import commonStyles from "../styles";
 import ProductCarousel from "../components/ProductCarousel";
 import mangoApi, { queries } from "../api";
+import { Context as AuthContext } from "../context/authContext";
+import FulfilmentCard from "../components/home/FulfilmentCard";
 
 const HomeScreen = ({ navigation }) => {
+	const { state } = useContext(AuthContext);
 	const [result, setResults] = useState([]);
 	const specialOfferApi = async () => {
 		try {
@@ -36,7 +39,7 @@ const HomeScreen = ({ navigation }) => {
 	return (
 		<View>
 			<ScrollView>
-				<AnonymousWelcomeCard />
+				{state.access_token ? <FulfilmentCard /> : <AnonymousWelcomeCard />}
 				<TouchableOpacity onPress={() => navigation.navigate("Browse")}>
 					<View style={styles.browseContainer}>
 						<FontAwesome5
