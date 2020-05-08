@@ -36,7 +36,8 @@ const signin = (dispatch) => async (email, password) => {
 const signout = (dispatch) => async () => {
 	await AsyncStorage.removeItem("access_token");
 	dispatch({ type: "signout" });
-	// navigate("loginFlow");
+	console.log("signout");
+	navigate("HomeScreen");
 };
 
 const tryLocalSignIn = (dispatch) => async () => {

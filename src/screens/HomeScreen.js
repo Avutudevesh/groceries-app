@@ -13,8 +13,21 @@ import ProductCarousel from "../components/ProductCarousel";
 import mangoApi, { queries } from "../api";
 import { Context as AuthContext } from "../context/authContext";
 import FulfilmentCard from "../components/home/FulfilmentCard";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const HomeScreen = ({ navigation }) => {
+	navigation.setOptions({
+		headerRight: () => (
+			<TouchableOpacity onPress={() => navigation.navigate("Account")}>
+				<MaterialCommunityIcons
+					name="account-outline"
+					size={35}
+					color="#00539F"
+					style={{ marginRight: 10 }}
+				/>
+			</TouchableOpacity>
+		),
+	});
 	const { state } = useContext(AuthContext);
 	const [result, setResults] = useState([]);
 	const specialOfferApi = async () => {

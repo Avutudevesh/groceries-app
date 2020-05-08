@@ -3,7 +3,7 @@ import { Image } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../screens/HomeScreen";
 import BrowseStack from "./BrowseStack";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AccountsScreen from "../screens/AccountsScreen";
 
 export default () => {
 	const Stack = createStackNavigator();
@@ -14,7 +14,6 @@ export default () => {
 				component={HomeScreen}
 				options={{
 					headerTitle: (props) => <LogoHeader {...props} />,
-					headerRight: () => <ProfileHeader />,
 				}}
 			/>
 			<Stack.Screen
@@ -22,21 +21,23 @@ export default () => {
 				component={BrowseStack}
 				options={{ headerShown: false }}
 			/>
+			<Stack.Screen
+				name="Account"
+				component={AccountsScreen}
+				options={{
+					headerStyle: {
+						backgroundColor: "#00539F",
+					},
+					headerTintColor: "#fff",
+					headerTitleStyle: {
+						fontWeight: "bold",
+					},
+				}}
+			/>
 		</Stack.Navigator>
 	);
 };
 
-const LogoHeader = () => {
+const LogoHeader = (props) => {
 	return <Image source={require("../../assets/tesco_logo.png")} />;
-};
-
-const ProfileHeader = () => {
-	return (
-		<MaterialCommunityIcons
-			name="account-outline"
-			size={35}
-			color="#00539F"
-			style={{ marginRight: 10 }}
-		/>
-	);
 };
