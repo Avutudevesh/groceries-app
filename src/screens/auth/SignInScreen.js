@@ -4,7 +4,7 @@ import commonStyles from "../../styles";
 import Button from "../../components/Button";
 import { Context as AuthContext } from "../../context/authContext";
 
-export default () => {
+export default ({ navigation }) => {
 	const { state, signin } = useContext(AuthContext);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");

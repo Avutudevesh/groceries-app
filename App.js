@@ -15,6 +15,7 @@ import SearchScreen from "./src/screens/SearchScreen";
 import HomeStack from "./src/navigation/HomeStack";
 import SignInScreen from "./src/screens/auth/SignInScreen";
 import { Provider as AuthProvider } from "./src/context/authContext";
+import { navigationRef } from "./src/navigation/RootNavigation";
 
 const Tab = createBottomTabNavigator();
 const BottomNavigation = () => {
@@ -85,34 +86,34 @@ const BottomNavigation = () => {
 const Root = createStackNavigator();
 const App = () => {
 	return (
-		<NavigationContainer>
-			<Root.Navigator>
-				<Root.Screen
-					name="Home"
-					component={BottomNavigation}
-					options={{ headerShown: false }}
-				/>
-				<Root.Screen
-					name="SignIn"
-					component={SignInScreen}
-					options={{
-						headerStyle: {
-							backgroundColor: "#00539F",
-						},
-						headerTintColor: "#fff",
-						headerTitleStyle: {
-							fontWeight: "bold",
-						},
-					}}
-				/>
-			</Root.Navigator>
-		</NavigationContainer>
+		<Root.Navigator>
+			<Root.Screen
+				name="BottomNavigation"
+				component={BottomNavigation}
+				options={{ headerShown: false }}
+			/>
+			<Root.Screen
+				name="SignIn"
+				component={SignInScreen}
+				options={{
+					headerStyle: {
+						backgroundColor: "#00539F",
+					},
+					headerTintColor: "#fff",
+					headerTitleStyle: {
+						fontWeight: "bold",
+					},
+				}}
+			/>
+		</Root.Navigator>
 	);
 };
 export default () => {
 	return (
-		<AuthProvider>
-			<App />
-		</AuthProvider>
+		<NavigationContainer ref={navigationRef}>
+			<AuthProvider>
+				<App />
+			</AuthProvider>
+		</NavigationContainer>
 	);
 };

@@ -3,6 +3,7 @@ import mangoApi from "../api";
 import signInRequestBody from "../api/auth/signInRequest";
 import createDataContext from "./createDataContext";
 import keys from "../../keys";
+import navigate from "../navigation/RootNavigation";
 
 const authReducer = (state, action) => {
 	switch (action.type) {
@@ -23,12 +24,12 @@ const signin = (dispatch) => async (email, password) => {
 			{ headers: { "ighs-appkey": `${keys.IDENTITY_CLIENT_ID}` } }
 		);
 		console.log(response.data.access_token);
-		await AsyncStorage.setItem("access_token", response.data.token);
-		dispatch({ type: "signin_success", payload: response.data.token });
-		// navigate("TrackList");
+		await AsyncStorage.setItem("access_token", response.data.access_token);
+		dispatch({ type: "signin_success", payload: response.data.access_token });
+		navigate("BottomNavigation");
 	} catch (e) {
 		// dispatch({ type: "signin_error", payload: "Something went wrong" });
-		console.log(e.response);
+		console.log(e);
 	}
 };
 
