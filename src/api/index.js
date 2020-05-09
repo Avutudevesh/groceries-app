@@ -7,6 +7,7 @@ import TAXONOMY_FOR_CATEGORY from "./taxonomyForCategory";
 import GET_CATEGORY_PRODUCTS from "./getCategoryProducts";
 import GET_FAVOURITES from "./getFavourites";
 import keys from "../../keys";
+import UPDATE_ITEMS from "./updateItems";
 
 const instance = axios.create({
 	baseURL: "https://api.tesco.com/shoppingexperiencealpha",
@@ -39,4 +40,5 @@ export const queries = {
 	TAXONOMY_FOR_CATEGORY,
 	GET_CATEGORY_PRODUCTS,
 	GET_FAVOURITES,
+	UPDATE_ITEMS,
 };

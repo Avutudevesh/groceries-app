@@ -32,6 +32,7 @@ export default () => {
 					headerTitleStyle: {
 						fontWeight: "bold",
 					},
+					headerBackTitleVisible: false,
 				}}
 			/>
 		</Stack.Navigator>

@@ -89,7 +89,11 @@ const Root = createStackNavigator();
 const App = () => {
 	return (
 		<Root.Navigator>
-			<Root.Screen name="SplashScreen" component={SplashScreen} />
+			<Root.Screen
+				name="SplashScreen"
+				component={SplashScreen}
+				options={{ headerShown: false }}
+			/>
 			<Root.Screen
 				name="BottomNavigation"
 				component={BottomNavigation}
@@ -106,6 +110,7 @@ const App = () => {
 					headerTitleStyle: {
 						fontWeight: "bold",
 					},
+					headerBackTitleVisible: false,
 				}}
 			/>
 		</Root.Navigator>

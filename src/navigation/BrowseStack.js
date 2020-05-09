@@ -21,6 +21,7 @@ export default () => {
 						fontWeight: "bold",
 					},
 					title: "Browse",
+					headerBackTitleVisible: false,
 				}}
 			/>
 			<Stack.Screen
@@ -34,6 +35,7 @@ export default () => {
 					headerTitleStyle: {
 						fontWeight: "bold",
 					},
+					headerBackTitleVisible: false,
 				}}
 			/>
 			<Stack.Screen
@@ -47,6 +49,7 @@ export default () => {
 					headerTitleStyle: {
 						fontWeight: "bold",
 					},
+					headerBackTitleVisible: false,
 				}}
 			/>
 			<Stack.Screen
@@ -60,6 +63,7 @@ export default () => {
 					headerTitleStyle: {
 						fontWeight: "bold",
 					},
+					headerBackTitleVisible: false,
 				}}
 			/>
 		</Stack.Navigator>
