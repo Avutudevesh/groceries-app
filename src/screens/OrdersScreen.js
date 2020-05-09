@@ -1,28 +1,18 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import AnonymousView from "../components/AnonymousView";
+import React, { useContext } from "react";
+import { View } from "react-native";
 import PrimaryToolBar from "../components/PrimaryToolBar";
+import { Context as AuthContext } from "../context/authContext";
+import OrdersAnonymous from "../components/orders/OrdersAnonymous";
+import OrdersList from "../components/orders/OrdersList";
 
 const OrdersScreen = () => {
+	const { state } = useContext(AuthContext);
 	return (
 		<View style={{ flex: 1 }}>
 			<PrimaryToolBar title="Orders" />
-			<View style={styles.container}>
-				<AnonymousView
-					title="No recent Orders"
-					subTitle="Once You've checkedout your orders will appear here"
-				/>
-			</View>
+			{state.access_token ? <OrdersList /> : <OrdersAnonymous />}
 		</View>
 	);
 };
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: "center",
-		marginHorizontal: 30,
-	},
-});
 
 export default OrdersScreen;

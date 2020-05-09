@@ -4,8 +4,8 @@ import commonStyles from "../../styles";
 import Button from "../../components/Button";
 import { Context as AuthContext } from "../../context/authContext";
 
-export default ({ navigation }) => {
-	const { state, signin } = useContext(AuthContext);
+export default () => {
+	const { signin } = useContext(AuthContext);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	return (
@@ -18,6 +18,8 @@ export default ({ navigation }) => {
 				style={styles.inputField}
 				placeholderTextColor="#808080"
 				onChangeText={setEmail}
+				autoCapitalize="none"
+				autoCorrect={false}
 			/>
 			<TextInput
 				value={password}
@@ -25,6 +27,8 @@ export default ({ navigation }) => {
 				style={styles.inputField}
 				placeholderTextColor="#808080"
 				onChangeText={setPassword}
+				autoCapitalize="none"
+				autoCorrect={false}
 			/>
 			<Text style={styles.linkText}>Forgotten password?</Text>
 			<Button
