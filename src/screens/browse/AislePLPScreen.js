@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Text, View } from "react-native";
 import mangoApi, { queries } from "../../api";
 import PLPList from "../../components/PLPList";
 

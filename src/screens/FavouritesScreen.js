@@ -1,28 +1,18 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import AnonymousView from "../components/AnonymousView";
+import React, { useContext } from "react";
+import { View } from "react-native";
 import PrimaryToolBar from "../components/PrimaryToolBar";
+import { Context as AuthContext } from "../context/authContext";
+import FavouritesAnonymous from "../components/favourites/FavouritesAnoymous";
+import FavouritesPLP from "../components/favourites/FavouritesPLP";
 
 const FavouritesScreen = () => {
+	const { state } = useContext(AuthContext);
 	return (
 		<View style={{ flex: 1 }}>
 			<PrimaryToolBar title="Favourites" />
-			<View style={styles.container}>
-				<AnonymousView
-					title="Favourites"
-					subTitle="Come back here to shop the products you've bought online and in-store."
-				/>
-			</View>
+			{state.access_token ? <FavouritesPLP /> : <FavouritesAnonymous />}
 		</View>
 	);
 };
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: "center",
-		alignContent: "center",
-	},
-});
 
 export default FavouritesScreen;
