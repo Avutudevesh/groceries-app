@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { View } from "react-native";
 import PrimaryToolBar from "../components/PrimaryToolBar";
 import { Context as AuthContext } from "../context/authContext";
 import FavouritesAnonymous from "../components/favourites/FavouritesAnoymous";
 import FavouritesPLP from "../components/favourites/FavouritesPLP";
+import { View } from "react-native";
 
 const FavouritesScreen = () => {
 	const { state } = useContext(AuthContext);

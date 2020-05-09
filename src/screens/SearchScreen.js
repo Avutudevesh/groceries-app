@@ -3,6 +3,7 @@ import { Text, View, TextInput, StyleSheet } from "react-native";
 import mangoApi, { queries } from "../api";
 import commonStyles from "../styles";
 import PLPList from "../components/PLPList";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const SearchScreen = () => {
 	const [term, setTerm] = useState("");
@@ -30,7 +31,7 @@ const SearchScreen = () => {
 	);
 	const searchProductsScreen = <PLPList productItems={results} />;
 	return (
-		<View style={{ flex: 1 }}>
+		<SafeAreaView style={{ flex: 1 }}>
 			<TextInput
 				style={styles.searchTextInput}
 				placeholder="Search for a product"
@@ -38,17 +39,16 @@ const SearchScreen = () => {
 				onSubmitEditing={searchProduct}
 			/>
 			{results != null ? searchProductsScreen : initialScreen}
-		</View>
+		</SafeAreaView>
 	);
 };
 
 const styles = StyleSheet.create({
 	searchTextInput: {
-		height: 80,
+		height: 70,
 		backgroundColor: "white",
 		paddingHorizontal: 20,
 		fontSize: 20,
-		paddingTop: 10,
 	},
 	searchEmptyContainer: {
 		flex: 1,

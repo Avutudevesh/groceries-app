@@ -46,7 +46,15 @@ const styles = StyleSheet.create({
 		marginHorizontal: 5,
 		width: 150,
 		paddingHorizontal: 10,
-		elevation: 4,
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 3.84,
+
+		elevation: 5,
 	},
 	imageStyle: {
 		height: 100,

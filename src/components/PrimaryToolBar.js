@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
 	toolBar: {
 		backgroundColor: "#00539F",
 		paddingVertical: 16,
+		paddingTop: 40,
 	},
 	textStyle: {
 		fontSize: 20,

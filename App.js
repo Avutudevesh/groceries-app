@@ -17,6 +17,7 @@ import SignInScreen from "./src/screens/auth/SignInScreen";
 import { Provider as AuthProvider } from "./src/context/authContext";
 import { navigationRef } from "./src/navigation/RootNavigation";
 import SplashScreen from "./src/screens/SplashScreen";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const Tab = createBottomTabNavigator();
 const BottomNavigation = () => {
@@ -112,10 +113,12 @@ const App = () => {
 };
 export default () => {
 	return (
-		<NavigationContainer ref={navigationRef}>
-			<AuthProvider>
-				<App />
-			</AuthProvider>
-		</NavigationContainer>
+		<SafeAreaProvider>
+			<NavigationContainer ref={navigationRef}>
+				<AuthProvider>
+					<App />
+				</AuthProvider>
+			</NavigationContainer>
+		</SafeAreaProvider>
 	);
 };
