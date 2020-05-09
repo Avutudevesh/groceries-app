@@ -9,7 +9,11 @@ export default ({ title, subTitle }) => {
 	return (
 		<View style={styles.container}>
 			<Text style={commonStyles.Text_H5}>{title}</Text>
-			<Text style={{ textAlign: "center" }}>{subTitle}</Text>
+			<Text
+				style={{ textAlign: "center", color: "#666666", marginVertical: 10 }}
+			>
+				{subTitle}
+			</Text>
 			<Button
 				buttonStyle={commonStyles.PrimaryButton}
 				textStyle={commonStyles.PrimaryButtonText}
@@ -33,5 +37,6 @@ export default ({ title, subTitle }) => {
 const styles = StyleSheet.create({
 	container: {
 		alignItems: "center",
+		marginHorizontal: 20,
 	},
 });

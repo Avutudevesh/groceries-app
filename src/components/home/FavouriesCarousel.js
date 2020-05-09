@@ -4,8 +4,11 @@ import mangoApi, { queries } from "../../api";
 
 export default () => {
 	const [result, setResults] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
+	const [isError, setIsError] = useState(false);
 	const favouritesApi = async () => {
 		try {
+			setIsLoading(true);
 			const result = await mangoApi.post("/q/", {
 				query: queries.GET_FAVOURITES,
 				variables: {
@@ -13,7 +16,10 @@ export default () => {
 				},
 			});
 			setResults(result.data.data.favourites.productItems);
+			setIsLoading(false);
 		} catch (err) {
+			setIsLoading(false);
+			setIsError(true);
 			if (err.response) {
 				console.log(err.response);
 			}
@@ -22,5 +28,12 @@ export default () => {
 	useEffect(() => {
 		favouritesApi();
 	}, []);
-	return <ProductCarousel title="Favourites" productItems={result} />;
+	return (
+		<ProductCarousel
+			title="Favourites"
+			productItems={result}
+			isError={isError}
+			isLoading={isLoading}
+		/>
+	);
 };

@@ -1,12 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import commonStyles from "../../styles";
 
-export default ({ totalItems, guidePrice }) => {
+export default ({ totalItems, guidePrice, isLoading, isError }) => {
 	return (
 		<View style={styles.container}>
 			<MiniBasketItem title="Items" value={totalItems} />
 			<MiniBasketItem title="Guide Price" value={guidePrice} />
+			{isLoading && <ActivityIndicator style={styles.loading} />}
 		</View>
 	);
 };
@@ -26,6 +27,15 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		padding: 15,
 		justifyContent: "space-between",
+		marginBottom: 10,
 	},
-	basketItem: {},
+	loading: {
+		position: "absolute",
+		left: 0,
+		right: 0,
+		top: 0,
+		bottom: 0,
+		alignItems: "center",
+		justifyContent: "center",
+	},
 });

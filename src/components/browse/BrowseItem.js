@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 		paddingVertical: 20,
 		borderBottomWidth: 0.5,
 		borderColor: "#D3D3D3",
-		marginLeft: 15,
+		paddingLeft: 15,
 	},
 	textStyle: {
 		...commonStyles.Text_H5,

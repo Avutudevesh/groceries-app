@@ -1,10 +1,10 @@
 import React from "react";
-import { View, FlatList } from "react-native";
+import { View, FlatList, ActivityIndicator, StyleSheet } from "react-native";
 import ProductCard from "./ProductCard";
 
-export default ({ productItems }) => {
-	return (
-		<View>
+export default ({ productItems, isLoading, isError }) => {
+	const setContent = () => {
+		return (
 			<FlatList
 				data={productItems}
 				keyExtractor={(product) => product.id}
@@ -12,6 +12,22 @@ export default ({ productItems }) => {
 					return <ProductCard product={item} />;
 				}}
 			/>
+		);
+	};
+	return (
+		<View style={{ flex: 1 }}>
+			{isLoading ? (
+				<ActivityIndicator size="large" style={styles.loading} />
+			) : (
+				setContent()
+			)}
 		</View>
 	);
 };
+
+const styles = StyleSheet.create({
+	loading: {
+		flex: 1,
+		backgroundColor: "white",
+	},
+});
