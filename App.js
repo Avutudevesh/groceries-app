@@ -15,6 +15,7 @@ import SearchScreen from "./src/screens/SearchScreen";
 import HomeStack from "./src/navigation/HomeStack";
 import SignInScreen from "./src/screens/auth/SignInScreen";
 import { Provider as AuthProvider } from "./src/context/authContext";
+import { Provider as BasketItemsProvider } from "./src/context/basketItemsContext";
 import { navigationRef } from "./src/navigation/RootNavigation";
 import SplashScreen from "./src/screens/SplashScreen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -120,9 +121,11 @@ export default () => {
 	return (
 		<SafeAreaProvider>
 			<NavigationContainer ref={navigationRef}>
-				<AuthProvider>
-					<App />
-				</AuthProvider>
+				<BasketItemsProvider>
+					<AuthProvider>
+						<App />
+					</AuthProvider>
+				</BasketItemsProvider>
 			</NavigationContainer>
 		</SafeAreaProvider>
 	);

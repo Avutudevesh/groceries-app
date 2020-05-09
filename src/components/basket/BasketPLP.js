@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import mangoApi, { queries } from "../../api";
 import PLPList from "../PLPList";
 import BasketEmpty from "./BasketEmpty";
 import MiniBasket from "./MiniBasket";
 import commonStyles from "../../styles";
 import Button from "../Button";
+import { Context as BasketItemsContext } from "../../context/basketItemsContext";
 
 export default () => {
+	const { state, fetchBasket } = useContext(BasketItemsContext);
+	let productItems = state.items.map((item) => {
+		return item.product;
+	});
 	const [results, setResults] = useState([]);
 	const [totalItems, setTotalItems] = useState(0);
 	const [guidePrice, setGuidePrice] = useState(0);
@@ -32,9 +37,9 @@ export default () => {
 		}
 	};
 	useEffect(() => {
-		basketApi();
+		// basketApi();
 	}, []);
-	if (results.length != 0) {
+	if (productItems.length != 0) {
 		return (
 			<>
 				<MiniBasket
@@ -48,7 +53,7 @@ export default () => {
 					textStyle={commonStyles.SecondaryButtonText}
 					text="Book a slot"
 				/>
-				<PLPList productItems={results} />
+				<PLPList productItems={productItems} />
 			</>
 		);
 	}

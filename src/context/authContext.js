@@ -8,9 +8,12 @@ import navigate from "../navigation/RootNavigation";
 const authReducer = (state, action) => {
 	switch (action.type) {
 		case "signin_success":
-			return { access_token: action.payload };
+			return {
+				access_token: action.payload,
+				signin_inprogress: false,
+			};
 		case "signout":
-			return { access_token: null };
+			return { ...state, access_token: null };
 		default:
 			return state;
 	}
@@ -42,14 +45,11 @@ const signout = (dispatch) => async () => {
 
 const tryLocalSignIn = (dispatch) => async () => {
 	const token = await AsyncStorage.getItem("access_token");
-	if (token) {
-		dispatch({ type: "signin_success", payload: token });
-	}
-	navigate("BottomNavigation");
+	dispatch({ type: "signin_success", payload: token });
 };
 
 export const { Context, Provider } = createDataContext(
 	authReducer,
 	{ signin, signout, tryLocalSignIn },
-	{ access_token: null }
+	{ access_token: null, signin_inprogress: true }
 );
