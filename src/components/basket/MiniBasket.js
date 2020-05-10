@@ -7,7 +7,7 @@ export default ({ totalItems, guidePrice, isLoading, isError }) => {
 		<View style={styles.container}>
 			<MiniBasketItem title="Items" value={totalItems} />
 			<MiniBasketItem title="Guide Price" value={guidePrice} />
-			{isLoading && <ActivityIndicator style={styles.loading} />}
+			{/* {isLoading && <ActivityIndicator style={styles.loading} />} */}
 		</View>
 	);
 };

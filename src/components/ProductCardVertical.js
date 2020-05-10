@@ -1,10 +1,12 @@
-import React from "react";
-import { Text, Image, View, StyleSheet } from "react-native";
+import React, { useContext } from "react";
+import { Text, Image, View, StyleSheet, TouchableOpacity } from "react-native";
 import Button from "./Button";
 import commonStyles from "../styles";
 import { Ionicons } from "@expo/vector-icons";
+import { Context as BasketContext } from "../context/basketItemsContext";
 
 export default ({ item }) => {
+	const { addItemToBasket, removeItemFromBasket } = useContext(BasketContext);
 	return (
 		<View style={styles.container}>
 			<Image
@@ -30,20 +32,32 @@ export default ({ item }) => {
 							style={commonStyles.Text_T4}
 						>{`£${item.product.price.actual}/${item.product.price.unitOfMeasure}`}</Text>
 					</View>
-					{renderButton(item.quantity)}
+					{renderButton(item, addItemToBasket, removeItemFromBasket)}
 				</View>
 			</View>
 		</View>
 	);
 };
 
-const renderButton = (quantity) => {
-	if (quantity) {
+const renderButton = (item, addClickAction, removeClickAction) => {
+	if (item.quantity) {
 		return (
 			<View style={styles.buttonsContainer}>
-				<Ionicons name="ios-remove-circle-outline" size={35} color="#00539F" />
-				<Text style={styles.quantityText}>{quantity}</Text>
-				<Ionicons name="ios-add-circle" size={35} color="#00539F" />
+				<TouchableOpacity onPress={() => removeClickAction(item)}>
+					<Ionicons
+						name="ios-remove-circle-outline"
+						size={35}
+						color="#00539F"
+					/>
+				</TouchableOpacity>
+				<Text style={styles.quantityText}>{item.quantity}</Text>
+				<TouchableOpacity
+					onPress={() => {
+						addClickAction(item);
+					}}
+				>
+					<Ionicons name="ios-add-circle" size={35} color="#00539F" />
+				</TouchableOpacity>
 			</View>
 		);
 	}
@@ -54,6 +68,9 @@ const renderButton = (quantity) => {
 				text="Add"
 				textStyle={commonStyles.PrimaryButtonText}
 				buttonStyle={commonStyles.PrimaryButtonSmall}
+				onClick={() => {
+					addClickAction(item);
+				}}
 			/>
 		</View>
 	);

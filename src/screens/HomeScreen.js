@@ -32,11 +32,9 @@ const HomeScreen = ({ navigation }) => {
 	const { state } = useContext(AuthContext);
 	const { fetchBasket, clearBasket } = useContext(BasketContext);
 	useEffect(() => {
-		console.log("Home Screen useEffect");
 		if (state.access_token) {
 			fetchBasket();
 		} else {
-			console.log("clean basket");
 			clearBasket();
 		}
 	}, [state]);

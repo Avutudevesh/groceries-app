@@ -64,6 +64,7 @@ const addItemToBasket = (dispatch, state) => (item) => {
 		updatedItems.push({ ...item, quantity: item.quantity + 1 });
 	}
 	dispatch({ type: "add_to_basket", payload: updatedItems });
+	updateItems(dispatch, item.product.id, item.quantity + 1, item.quantity);
 };
 
 const removeItemFromBasket = (dispatch, state) => (item) => {
@@ -74,6 +75,32 @@ const removeItemFromBasket = (dispatch, state) => (item) => {
 		return ele;
 	});
 	dispatch({ type: "remove_from_basket", payload: updatedItems });
+	updateItems(dispatch, item.product.id, item.quantity - 1, item.quantity);
+};
+
+const updateItems = async (dispatch, id, newValue, oldValue) => {
+	try {
+		const response = await mangoApi.post("/q/", {
+			query: queries.UPDATE_ITEMS,
+			variables: {
+				items: [
+					{
+						id,
+						oldValue,
+						newValue,
+						oldUnitChoice: "pcs",
+						newUnitChoice: "pcs",
+					},
+				],
+			},
+		});
+		dispatch({
+			type: "fetch_basket",
+			payload: response.data.data.basket.items,
+		});
+	} catch (e) {
+		console.log(e);
+	}
 };
 
 export const { Context, Provider } = createDataContext(

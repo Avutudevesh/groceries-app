@@ -32,14 +32,14 @@ export default ({ productItem }) => {
 							style={commonStyles.Text_T4}
 						>{`£${productItem.product.price.actual}/${productItem.product.price.unitOfMeasure}`}</Text>
 					</View>
-					{renderButtons(productItem, addItemToBasket, removeItemFromBasket)}
+					{renderButton(productItem, addItemToBasket, removeItemFromBasket)}
 				</View>
 			</View>
 		</View>
 	);
 };
 
-const renderButtons = (item, addClickAction, removeClickAction) => {
+const renderButton = (item, addClickAction, removeClickAction) => {
 	if (item.quantity) {
 		return (
 			<View style={styles.buttonsContainer}>
