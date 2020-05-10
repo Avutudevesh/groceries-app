@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Platform, StatusBar } from "react-native";
 
 export default ({ title }) => {
 	return (
@@ -9,11 +9,13 @@ export default ({ title }) => {
 	);
 };
 
+const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 50 : StatusBar.currentHeight;
+
 const styles = StyleSheet.create({
 	toolBar: {
 		backgroundColor: "#00539F",
 		paddingVertical: 16,
-		paddingTop: 50,
+		paddingTop: STATUSBAR_HEIGHT,
 	},
 	textStyle: {
 		fontSize: 20,

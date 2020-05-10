@@ -1,9 +1,10 @@
 import React, { useState, useContext } from "react";
-import { Text, View, TextInput, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Platform, StatusBar } from "react-native";
 import mangoApi, { queries } from "../api";
 import commonStyles from "../styles";
 import PLPList from "../components/PLPList";
 import { Context as BasketContext } from "../context/basketItemsContext";
+import { SearchBar } from "react-native-elements";
 
 const SearchScreen = () => {
 	const [term, setTerm] = useState("");
@@ -47,26 +48,32 @@ const SearchScreen = () => {
 	);
 	return (
 		<View style={{ flex: 1, backgroundColor: "white" }}>
-			<TextInput
-				style={styles.searchTextInput}
+			<SearchBar
 				placeholder="Search for a product"
 				onChangeText={setTerm}
 				onSubmitEditing={searchProduct}
+				value={term}
+				containerStyle={styles.searchContainer}
+				inputContainerStyle={styles.searchInputContainer}
+				placeholderTextColor="#696969"
+				inputStyle={{ color: "#696969" }}
 			/>
 			{results != null || isLoading ? searchProductsScreen() : initialScreen()}
 		</View>
 	);
 };
 
+const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 50 : StatusBar.currentHeight;
+
 const styles = StyleSheet.create({
-	searchTextInput: {
-		height: 70,
-		backgroundColor: "white",
+	searchContainer: {
+		backgroundColor: "#00539F",
 		paddingHorizontal: 20,
-		fontSize: 20,
-		marginTop: 40,
-		borderBottomColor: "#D3D3D3",
-		borderBottomWidth: 1,
+		paddingTop: STATUSBAR_HEIGHT,
+		borderWidth: 0,
+	},
+	searchInputContainer: {
+		backgroundColor: "white",
 	},
 	searchEmptyContainer: {
 		flex: 1,
