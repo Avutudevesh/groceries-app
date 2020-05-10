@@ -10,7 +10,7 @@ const SearchScreen = () => {
 	const [results, setResults] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isError, setIsError] = useState(false);
-	const { state, mergeLocalAttributes } = useContext(BasketContext);
+	const { mergeLocalAttributes } = useContext(BasketContext);
 	const searchProduct = async () => {
 		try {
 			setIsLoading(true);
@@ -20,12 +20,7 @@ const SearchScreen = () => {
 					query: term,
 				},
 			});
-			mergedItems = mergeLocalAttributes(
-				response.data.data.search.productItems,
-				state.items
-			);
-			console.log(mergedItems);
-			setResults(mergedItems);
+			setResults(response.data.data.search.productItems);
 			setIsLoading(false);
 		} catch (err) {
 			console.log(err);
@@ -37,14 +32,18 @@ const SearchScreen = () => {
 			}
 		}
 	};
-	const initialScreen = (
+	const initialScreen = () => (
 		<View style={styles.searchEmptyContainer}>
 			<Text style={styles.searchHeading}>Search Groceries</Text>
 			<Text style={styles.searchSubHeading}>What are you looking for?</Text>
 		</View>
 	);
-	const searchProductsScreen = (
-		<PLPList productItems={results} isLoading={isLoading} isError={isError} />
+	const searchProductsScreen = () => (
+		<PLPList
+			productItems={results ? mergeLocalAttributes(results) : []}
+			isLoading={isLoading}
+			isError={isError}
+		/>
 	);
 	return (
 		<View style={{ flex: 1, backgroundColor: "white" }}>
@@ -54,7 +53,7 @@ const SearchScreen = () => {
 				onChangeText={setTerm}
 				onSubmitEditing={searchProduct}
 			/>
-			{results != null || isLoading ? searchProductsScreen : initialScreen}
+			{results != null || isLoading ? searchProductsScreen() : initialScreen()}
 		</View>
 	);
 };

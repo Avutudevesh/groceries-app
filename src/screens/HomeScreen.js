@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
 	Text,
 	View,
@@ -10,6 +10,7 @@ import AnonymousWelcomeCard from "../components/AnonymousWelcomeCard";
 import { FontAwesome5 } from "@expo/vector-icons";
 import commonStyles from "../styles";
 import { Context as AuthContext } from "../context/authContext";
+import { Context as BasketContext } from "../context/basketItemsContext";
 import FulfilmentCard from "../components/home/FulfilmentCard";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SpecialOfferCarousel from "../components/home/SpecialOfferCarousel";
@@ -29,6 +30,16 @@ const HomeScreen = ({ navigation }) => {
 		),
 	});
 	const { state } = useContext(AuthContext);
+	const { fetchBasket, clearBasket } = useContext(BasketContext);
+	useEffect(() => {
+		console.log("Home Screen useEffect");
+		if (state.access_token) {
+			fetchBasket();
+		} else {
+			console.log("clean basket");
+			clearBasket();
+		}
+	}, [state]);
 	return (
 		<View>
 			<ScrollView>

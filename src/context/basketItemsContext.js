@@ -1,30 +1,18 @@
 import createDataContext from "./createDataContext";
-import navigate from "../navigation/RootNavigation";
 import mangoApi, { queries } from "../api";
 
 const itemsReducer = (state, action) => {
 	switch (action.type) {
 		case "fetch_basket":
 			return { items: action.payload };
+		case "add_to_basket":
+			return { items: action.payload };
+		case "remove_from_basket":
+			return { items: action.payload };
+		case "clear_basket":
+			return { items: [] };
 		default:
 			return state;
-	}
-};
-
-const initialBasketSync = (dispatch) => async () => {
-	try {
-		const response = await mangoApi.post("/q/", {
-			query: queries.UPDATE_ITEMS,
-		});
-		dispatch({
-			type: "fetch_basket",
-			payload: response.data.data.basket.items,
-		});
-		console.log(response.data.data.basket.items);
-		navigate("BottomNavigation");
-	} catch (e) {
-		navigate("BottomNavigation");
-		console.log(e);
 	}
 };
 
@@ -42,10 +30,13 @@ const fetchBasket = (dispatch) => async () => {
 	}
 };
 
-const mergeLocalAttributes = () => (productItems, basketItems) => {
-	// console.log(productItems);
+const clearBasket = (dispatch) => () => {
+	dispatch({ type: "clear_basket" });
+};
+
+const mergeLocalAttributes = (dispatch, state) => (productItems) => {
 	const mergedProductItems = productItems.map((item) => {
-		const basketItem = basketItems.find((ele) => {
+		const basketItem = state.items.find((ele) => {
 			return ele.product.id === item.id;
 		});
 		if (basketItem) {
@@ -60,8 +51,39 @@ const mergeLocalAttributes = () => (productItems, basketItems) => {
 	return mergedProductItems;
 };
 
+const addItemToBasket = (dispatch, state) => (item) => {
+	let productInBasket = false;
+	const updatedItems = state.items.map((ele) => {
+		if (ele.product.id === item.product.id) {
+			productInBasket = true;
+			return { ...ele, quantity: ele.quantity + 1 };
+		}
+		return ele;
+	});
+	if (!productInBasket) {
+		updatedItems.push({ ...item, quantity: item.quantity + 1 });
+	}
+	dispatch({ type: "add_to_basket", payload: updatedItems });
+};
+
+const removeItemFromBasket = (dispatch, state) => (item) => {
+	const updatedItems = state.items.map((ele) => {
+		if (ele.product.id === item.product.id) {
+			return { ...ele, quantity: ele.quantity - 1 };
+		}
+		return ele;
+	});
+	dispatch({ type: "remove_from_basket", payload: updatedItems });
+};
+
 export const { Context, Provider } = createDataContext(
 	itemsReducer,
-	{ fetchBasket, initialBasketSync, mergeLocalAttributes },
+	{
+		fetchBasket,
+		mergeLocalAttributes,
+		addItemToBasket,
+		removeItemFromBasket,
+		clearBasket,
+	},
 	{ items: [] }
 );

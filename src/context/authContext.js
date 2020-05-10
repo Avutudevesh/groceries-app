@@ -46,6 +46,7 @@ const signout = (dispatch) => async () => {
 const tryLocalSignIn = (dispatch) => async () => {
 	const token = await AsyncStorage.getItem("access_token");
 	dispatch({ type: "signin_success", payload: token });
+	navigate("BottomNavigation");
 };
 
 export const { Context, Provider } = createDataContext(

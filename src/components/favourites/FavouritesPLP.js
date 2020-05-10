@@ -5,7 +5,7 @@ import PLPList from "../PLPList";
 import { Context as BasketContext } from "../../context/basketItemsContext";
 
 export default () => {
-	const { state, mergeLocalAttributes } = useContext(BasketContext);
+	const { mergeLocalAttributes } = useContext(BasketContext);
 	const [results, setResults] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
@@ -18,12 +18,7 @@ export default () => {
 					count: 24,
 				},
 			});
-			setResults(
-				mergeLocalAttributes(
-					response.data.data.favourites.productItems,
-					state.items
-				)
-			);
+			setResults(response.data.data.favourites.productItems);
 			setIsLoading(false);
 		} catch (err) {
 			setIsLoading(false);
@@ -46,7 +41,11 @@ export default () => {
 					color: "#666666",
 				}}
 			>{`${results.length} products`}</Text>
-			<PLPList productItems={results} isLoading={isLoading} isError={isError} />
+			<PLPList
+				productItems={results ? mergeLocalAttributes(results) : []}
+				isLoading={isLoading}
+				isError={isError}
+			/>
 		</>
 	);
 };

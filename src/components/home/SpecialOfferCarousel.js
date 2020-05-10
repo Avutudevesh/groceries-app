@@ -4,8 +4,8 @@ import mangoApi, { queries } from "../../api";
 import { Context as BasketContext } from "../../context/basketItemsContext";
 
 export default () => {
-	const { state, mergeLocalAttributes } = useContext(BasketContext);
-	const [result, setResults] = useState([]);
+	const { mergeLocalAttributes } = useContext(BasketContext);
+	const [results, setResults] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
 	const specialOfferApi = async () => {
@@ -18,12 +18,7 @@ export default () => {
 					count: 24,
 				},
 			});
-			setResults(
-				mergeLocalAttributes(
-					result.data.data.promotionType.productItems,
-					state.items
-				)
-			);
+			setResults(result.data.data.promotionType.productItems);
 			setIsLoading(false);
 		} catch (err) {
 			setIsError(true);
@@ -40,7 +35,7 @@ export default () => {
 	return (
 		<ProductCarousel
 			title="Special Offers"
-			productItems={result}
+			productItems={results ? mergeLocalAttributes(results) : []}
 			isError={isError}
 			isLoading={isLoading}
 		/>

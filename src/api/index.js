@@ -20,6 +20,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
 	async (config) => {
+		console.log("network request made");
 		const token = await AsyncStorage.getItem("access_token");
 		if (token) {
 			config.headers.Authorization = `Bearer ${token}`;
