@@ -11,9 +11,14 @@ const authReducer = (state, action) => {
 			return {
 				access_token: action.payload,
 				signin_inprogress: false,
+				signin_error: false,
 			};
 		case "signout":
 			return { ...state, access_token: null };
+		case "signin":
+			return { ...state, signin_inprogress: true };
+		case "signin_error":
+			return { ...state, signin_inprogress: false, signin_error: true };
 		default:
 			return state;
 	}
@@ -21,6 +26,7 @@ const authReducer = (state, action) => {
 
 const signin = (dispatch) => async (email, password) => {
 	try {
+		dispatch({ type: "signin" });
 		const response = await mangoApi.post(
 			"/api/v3/identify",
 			signInRequestBody(email, password),
@@ -31,7 +37,7 @@ const signin = (dispatch) => async (email, password) => {
 		dispatch({ type: "signin_success", payload: response.data.access_token });
 		navigate("BottomNavigation");
 	} catch (e) {
-		// dispatch({ type: "signin_error", payload: "Something went wrong" });
+		dispatch({ type: "signin_error" });
 		console.log(e);
 	}
 };
@@ -52,5 +58,5 @@ const tryLocalSignIn = (dispatch) => async () => {
 export const { Context, Provider } = createDataContext(
 	authReducer,
 	{ signin, signout, tryLocalSignIn },
-	{ access_token: null, signin_inprogress: true }
+	{ access_token: null, signin_inprogress: false, signin_error: false }
 );
