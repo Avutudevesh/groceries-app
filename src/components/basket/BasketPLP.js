@@ -9,9 +9,6 @@ import { Context as BasketItemsContext } from "../../context/basketItemsContext"
 
 export default () => {
 	const { state, fetchBasket } = useContext(BasketItemsContext);
-	let productItems = state.items.map((item) => {
-		return item.product;
-	});
 	const [results, setResults] = useState([]);
 	const [totalItems, setTotalItems] = useState(0);
 	const [guidePrice, setGuidePrice] = useState(0);
@@ -39,7 +36,7 @@ export default () => {
 	useEffect(() => {
 		// basketApi();
 	}, []);
-	if (productItems.length != 0) {
+	if (state.items.length != 0) {
 		return (
 			<>
 				<MiniBasket
@@ -53,7 +50,7 @@ export default () => {
 					textStyle={commonStyles.SecondaryButtonText}
 					text="Book a slot"
 				/>
-				<PLPList productItems={productItems} />
+				<PLPList productItems={state.items} />
 			</>
 		);
 	}

@@ -32,14 +32,14 @@ export default StyleSheet.create({
 		fontWeight: "bold",
 	},
 	PrimaryButtonSmall: {
-		paddingVertical: 10,
+		paddingVertical: 8,
 		paddingHorizontal: 20,
 		marginVertical: 5,
 		backgroundColor: "#00539F",
 		borderRadius: 24,
 		borderWidth: 2,
 		borderColor: "#00539F",
-		width: 130,
+		width: 110,
 	},
 	Text_H3: {
 		fontSize: 24,

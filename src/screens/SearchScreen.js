@@ -1,26 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, TextInput, StyleSheet } from "react-native";
 import mangoApi, { queries } from "../api";
 import commonStyles from "../styles";
 import PLPList from "../components/PLPList";
+import { Context as BasketContext } from "../context/basketItemsContext";
 
 const SearchScreen = () => {
 	const [term, setTerm] = useState("");
 	const [results, setResults] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isError, setIsError] = useState(false);
+	const { state, mergeLocalAttributes } = useContext(BasketContext);
 	const searchProduct = async () => {
 		try {
 			setIsLoading(true);
-			const result = await mangoApi.post("/q/", {
+			const response = await mangoApi.post("/q/", {
 				query: queries.SEARCH_QUERY,
 				variables: {
 					query: term,
 				},
 			});
-			setResults(result.data.data.search.productItems);
+			mergedItems = mergeLocalAttributes(
+				response.data.data.search.productItems,
+				state.items
+			);
+			console.log(mergedItems);
+			setResults(mergedItems);
 			setIsLoading(false);
 		} catch (err) {
+			console.log(err);
 			setIsLoading(false);
 			setIsError(true);
 			setResults([]);

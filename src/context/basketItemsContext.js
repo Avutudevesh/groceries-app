@@ -42,8 +42,26 @@ const fetchBasket = (dispatch) => async () => {
 	}
 };
 
+const mergeLocalAttributes = () => (productItems, basketItems) => {
+	// console.log(productItems);
+	const mergedProductItems = productItems.map((item) => {
+		const basketItem = basketItems.find((ele) => {
+			return ele.product.id === item.id;
+		});
+		if (basketItem) {
+			return {
+				product: item,
+				quantity: basketItem.quantity,
+				weight: basketItem.weight,
+			};
+		}
+		return { product: item, quantity: 0, weight: 0 };
+	});
+	return mergedProductItems;
+};
+
 export const { Context, Provider } = createDataContext(
 	itemsReducer,
-	{ fetchBasket, initialBasketSync },
+	{ fetchBasket, initialBasketSync, mergeLocalAttributes },
 	{ items: [] }
 );

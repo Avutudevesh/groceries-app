@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ProductCarousel from "../ProductCarousel";
 import mangoApi, { queries } from "../../api";
+import { Context as BasketContext } from "../../context/basketItemsContext";
 
 export default () => {
+	const { state, mergeLocalAttributes } = useContext(BasketContext);
 	const [result, setResults] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
@@ -16,7 +18,12 @@ export default () => {
 					count: 24,
 				},
 			});
-			setResults(result.data.data.promotionType.productItems);
+			setResults(
+				mergeLocalAttributes(
+					result.data.data.promotionType.productItems,
+					state.items
+				)
+			);
 			setIsLoading(false);
 		} catch (err) {
 			setIsError(true);

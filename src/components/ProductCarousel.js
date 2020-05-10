@@ -6,7 +6,7 @@ import {
 	StyleSheet,
 	ActivityIndicator,
 } from "react-native";
-import ProductCardHorizontal from "./ProductCardHorizontal";
+import ProductCardVertical from "./ProductCardVertical";
 import commonStyles from "../styles";
 
 export default ({ title, productItems, isLoading, isError }) => {
@@ -15,9 +15,9 @@ export default ({ title, productItems, isLoading, isError }) => {
 			<FlatList
 				horizontal
 				data={productItems}
-				keyExtractor={(product) => product.id}
+				keyExtractor={(item) => item.product.id}
 				renderItem={({ item }) => {
-					return <ProductCardHorizontal product={item} />;
+					return <ProductCardVertical item={item} />;
 				}}
 				showsHorizontalScrollIndicator={false}
 			/>

@@ -7,9 +7,9 @@ export default ({ productItems, isLoading, isError }) => {
 		return (
 			<FlatList
 				data={productItems}
-				keyExtractor={(product) => product.id}
+				keyExtractor={(item) => item.product.id}
 				renderItem={({ item }) => {
-					return <ProductCard product={item} />;
+					return <ProductCard productItem={item} />;
 				}}
 			/>
 		);

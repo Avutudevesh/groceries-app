@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Text } from "react-native";
 import mangoApi, { queries } from "../../api";
 import PLPList from "../PLPList";
+import { Context as BasketContext } from "../../context/basketItemsContext";
 
 export default () => {
+	const { state, mergeLocalAttributes } = useContext(BasketContext);
 	const [results, setResults] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
@@ -16,7 +18,12 @@ export default () => {
 					count: 24,
 				},
 			});
-			setResults(response.data.data.favourites.productItems);
+			setResults(
+				mergeLocalAttributes(
+					response.data.data.favourites.productItems,
+					state.items
+				)
+			);
 			setIsLoading(false);
 		} catch (err) {
 			setIsLoading(false);

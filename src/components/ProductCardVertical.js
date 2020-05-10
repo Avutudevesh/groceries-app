@@ -1,43 +1,43 @@
 import React from "react";
 import { Text, Image, View, StyleSheet } from "react-native";
-import Button from "../components/Button";
+import Button from "./Button";
 import commonStyles from "../styles";
 import { Ionicons } from "@expo/vector-icons";
 
-export default ({ productItem }) => {
+export default ({ item }) => {
 	return (
 		<View style={styles.container}>
 			<Image
 				source={{
-					uri: productItem.product.defaultImageUrl,
+					uri: item.product.defaultImageUrl,
 				}}
 				style={styles.imageStyle}
 			/>
-			<View style={{ marginHorizontal: 10, flex: 1 }}>
+			<View>
 				<Text
 					style={styles.productTitle}
 					numberOfLines={2}
 					ellipsizeMode="tail"
 				>
-					{productItem.product.title}
+					{item.product.title}
 				</Text>
-				<View style={styles.priceViewStyle}>
-					<View>
-						<Text style={commonStyles.Text_H4}>
-							£{productItem.product.price.actual}
+				<View>
+					<View style={styles.priceViewStyle}>
+						<Text style={commonStyles.Text_H5}>
+							£{item.product.price.actual}
 						</Text>
 						<Text
 							style={commonStyles.Text_T4}
-						>{`£${productItem.product.price.actual}/${productItem.product.price.unitOfMeasure}`}</Text>
+						>{`£${item.product.price.actual}/${item.product.price.unitOfMeasure}`}</Text>
 					</View>
-					{renderButtons(productItem.quantity)}
+					{renderButton(item.quantity)}
 				</View>
 			</View>
 		</View>
 	);
 };
 
-const renderButtons = (quantity) => {
+const renderButton = (quantity) => {
 	if (quantity) {
 		return (
 			<View style={styles.buttonsContainer}>
@@ -61,43 +61,44 @@ const renderButtons = (quantity) => {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		flexDirection: "row",
 		backgroundColor: "white",
 		paddingVertical: 10,
 		marginVertical: 5,
-		marginHorizontal: 3,
+		marginHorizontal: 5,
+		width: 150,
+		paddingHorizontal: 10,
 		shadowColor: "#000",
 		shadowOffset: {
 			width: 0,
-			height: 1,
+			height: 2,
 		},
-		shadowOpacity: 0.2,
-		shadowRadius: 1.41,
+		shadowOpacity: 0.25,
+		shadowRadius: 3.84,
 
-		elevation: 2,
+		elevation: 5,
 	},
 	imageStyle: {
 		height: 100,
 		width: 100,
 		marginHorizontal: 15,
+		marginBottom: 10,
 	},
 	priceViewStyle: {
-		flexDirection: "row",
-		marginTop: 10,
+		marginVertical: 10,
 	},
 	productTitle: {
-		...commonStyles.Text_H5,
+		...commonStyles.Text_H6,
 		color: "#00539F",
 	},
 	buttonsContainer: {
 		flex: 1,
 		flexDirection: "row",
-		justifyContent: "flex-end",
+		justifyContent: "space-evenly",
+		alignContent: "center",
 	},
 	quantityText: {
 		...commonStyles.Text_H5,
-		marginHorizontal: 15,
+		marginHorizontal: 10,
 		marginTop: 8,
 	},
 });
