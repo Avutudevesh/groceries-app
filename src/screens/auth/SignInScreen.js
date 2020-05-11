@@ -30,6 +30,7 @@ export default () => {
 				autoCorrect={false}
 			/>
 			<TextInput
+				secureTextEntry={true}
 				value={password}
 				placeholder="Password"
 				style={styles.inputField}

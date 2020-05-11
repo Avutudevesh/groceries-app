@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "tescoClone",
-    "slug": "tescoClone",
+    "name": "Grocery Shopping",
+    "slug": "grocery_shopping",
     "platforms": [
       "ios",
       "android",
@@ -23,6 +23,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": ""
   }
 }

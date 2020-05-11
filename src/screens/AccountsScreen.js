@@ -5,18 +5,22 @@ import commonStyles from "../styles";
 import { Context as AuthContext } from "../context/authContext";
 
 export default () => {
-	const { signout } = useContext(AuthContext);
-	return (
-		<TouchableOpacity
-			onPress={() => {
-				signout();
-			}}
-			style={styles.container}
-		>
-			<MaterialIcons name="exit-to-app" size={24} color="#00539F" />
-			<Text style={styles.text}>Sign Out</Text>
-		</TouchableOpacity>
-	);
+	const { state, signout } = useContext(AuthContext);
+	if (state.access_token) {
+		return (
+			<TouchableOpacity
+				onPress={() => {
+					signout();
+				}}
+				style={styles.container}
+			>
+				<MaterialIcons name="exit-to-app" size={24} color="#00539F" />
+				<Text style={styles.text}>Sign Out</Text>
+			</TouchableOpacity>
+		);
+	}
+
+	return <Text>Login to access your account.</Text>;
 };
 
 const styles = StyleSheet.create({
