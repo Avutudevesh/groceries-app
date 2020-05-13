@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import mangoApi, { queries } from "../../api";
 import { Ionicons } from "@expo/vector-icons";
 import BrowseList from "../../components/browse/BrowseList";

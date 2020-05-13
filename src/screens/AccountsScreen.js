@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import commonStyles from "../styles";
 import { Context as AuthContext } from "../context/authContext";
+import { commonStyles, colors } from "../theme";
 
 export default () => {
 	const { state, signout } = useContext(AuthContext);
@@ -14,7 +14,7 @@ export default () => {
 				}}
 				style={styles.container}
 			>
-				<MaterialIcons name="exit-to-app" size={24} color="#00539F" />
+				<MaterialIcons name="exit-to-app" size={24} color={colors.primary} />
 				<Text style={styles.text}>Sign Out</Text>
 			</TouchableOpacity>
 		);
@@ -26,12 +26,12 @@ export default () => {
 const styles = StyleSheet.create({
 	container: {
 		flexDirection: "row",
-		backgroundColor: "white",
+		backgroundColor: colors.primaryBackground,
 		padding: 20,
 	},
 	text: {
 		...commonStyles.Text_H5,
-		color: "#00539F",
+		color: colors.primary,
 		marginLeft: 10,
 	},
 });

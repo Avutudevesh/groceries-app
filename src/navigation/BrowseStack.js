@@ -4,6 +4,7 @@ import SuperDepartmentScreen from "../screens/browse/SuperDepartmentsScreen";
 import DepartmentScreen from "../screens/browse/DepartmentScreen";
 import AisleScreen from "../screens/browse/AisleScreen";
 import AislePLPScreen from "../screens/browse/AislePLPScreen";
+import { colors } from "../theme";
 
 export default () => {
 	const Stack = createStackNavigator();
@@ -14,9 +15,9 @@ export default () => {
 				component={SuperDepartmentScreen}
 				options={{
 					headerStyle: {
-						backgroundColor: "#00539F",
+						backgroundColor: colors.primary,
 					},
-					headerTintColor: "#fff",
+					headerTintColor: colors.primaryBackground,
 					headerTitleStyle: {
 						fontWeight: "bold",
 					},
@@ -29,9 +30,9 @@ export default () => {
 				component={DepartmentScreen}
 				options={{
 					headerStyle: {
-						backgroundColor: "#00539F",
+						backgroundColor: colors.primary,
 					},
-					headerTintColor: "#fff",
+					headerTintColor: colors.primaryBackground,
 					headerTitleStyle: {
 						fontWeight: "bold",
 					},
@@ -43,9 +44,9 @@ export default () => {
 				component={AisleScreen}
 				options={{
 					headerStyle: {
-						backgroundColor: "#00539F",
+						backgroundColor: colors.primary,
 					},
-					headerTintColor: "#fff",
+					headerTintColor: colors.primaryBackground,
 					headerTitleStyle: {
 						fontWeight: "bold",
 					},
@@ -57,9 +58,9 @@ export default () => {
 				component={AislePLPScreen}
 				options={{
 					headerStyle: {
-						backgroundColor: "#00539F",
+						backgroundColor: colors.primary,
 					},
-					headerTintColor: "#fff",
+					headerTintColor: colors.primaryBackground,
 					headerTitleStyle: {
 						fontWeight: "bold",
 					},

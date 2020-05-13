@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Text, Image, View, StyleSheet, TouchableOpacity } from "react-native";
 import Button from "../components/Button";
-import commonStyles from "../styles";
 import { Ionicons } from "@expo/vector-icons";
 import { Context as BasketContext } from "../context/basketItemsContext";
+import { colors, commonStyles } from "../theme";
 
 export default ({ productItem }) => {
 	const { addItemToBasket, removeItemFromBasket } = useContext(BasketContext);
@@ -47,7 +47,7 @@ const renderButton = (item, addClickAction, removeClickAction) => {
 					<Ionicons
 						name="ios-remove-circle-outline"
 						size={35}
-						color="#00539F"
+						color={colors.primary}
 					/>
 				</TouchableOpacity>
 				<Text style={styles.quantityText}>{item.quantity}</Text>
@@ -56,7 +56,7 @@ const renderButton = (item, addClickAction, removeClickAction) => {
 						addClickAction(item);
 					}}
 				>
-					<Ionicons name="ios-add-circle" size={35} color="#00539F" />
+					<Ionicons name="ios-add-circle" size={35} color={colors.primary} />
 				</TouchableOpacity>
 			</View>
 		);
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
 		paddingVertical: 10,
 		marginVertical: 5,
 		marginHorizontal: 3,
-		shadowColor: "#000",
+		shadowColor: colors.black,
 		shadowOffset: {
 			width: 0,
 			height: 1,
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
 	},
 	productTitle: {
 		...commonStyles.Text_H5,
-		color: "#00539F",
+		color: colors.primary,
 	},
 	buttonsContainer: {
 		flex: 1,

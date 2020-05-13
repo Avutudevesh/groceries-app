@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import { Text, View, StyleSheet, Platform, StatusBar } from "react-native";
 import mangoApi, { queries } from "../api";
-import commonStyles from "../styles";
 import PLPList from "../components/PLPList";
 import { Context as BasketContext } from "../context/basketItemsContext";
 import { SearchBar } from "react-native-elements";
+import { commonStyles, colors } from "../theme";
 
 const SearchScreen = () => {
 	const [term, setTerm] = useState("");
@@ -55,8 +55,8 @@ const SearchScreen = () => {
 				value={term}
 				containerStyle={styles.searchContainer}
 				inputContainerStyle={styles.searchInputContainer}
-				placeholderTextColor="#696969"
-				inputStyle={{ color: "#696969" }}
+				placeholderTextColor={colors.textInputPlaceholderColor}
+				inputStyle={{ color: colors.textInputPlaceholderColor }}
 			/>
 			{results != null || isLoading ? searchProductsScreen() : initialScreen()}
 		</View>
@@ -67,13 +67,13 @@ const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 50 : StatusBar.currentHeight;
 
 const styles = StyleSheet.create({
 	searchContainer: {
-		backgroundColor: "#00539F",
+		backgroundColor: colors.primary,
 		paddingHorizontal: 20,
 		paddingTop: STATUSBAR_HEIGHT,
 		borderWidth: 0,
 	},
 	searchInputContainer: {
-		backgroundColor: "white",
+		backgroundColor: colors.primaryBackground,
 	},
 	searchEmptyContainer: {
 		flex: 1,
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
 	},
 	searchSubHeading: {
 		...commonStyles.Text_T2,
-		color: "#666666",
+		color: colors.subHeadingColor,
 		marginTop: 10,
 	},
 });

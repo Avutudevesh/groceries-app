@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Button from "../Button";
-import commonStyles from "../../styles";
+import { colors, commonStyles } from "../../theme";
 
 export default () => {
 	return (
@@ -24,22 +24,22 @@ export default () => {
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: "#00539F",
+		backgroundColor: colors.primary,
 		padding: 15,
 	},
 	innerContainer: {
-		backgroundColor: "white",
+		backgroundColor: colors.primaryBackground,
 		marginTop: 20,
 		padding: 15,
 	},
 	headingText: {
 		...commonStyles.Text_H3,
-		color: "white",
+		color: colors.primaryBackground,
 		marginBottom: 5,
 	},
 	subHeadingText: {
 		...commonStyles.Text_T2,
-		color: "white",
+		color: colors.primaryBackground,
 	},
 	innerContainerText: {
 		marginBottom: 10,

@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../screens/HomeScreen";
 import BrowseStack from "./BrowseStack";
 import AccountsScreen from "../screens/AccountsScreen";
+import { colors } from "../theme";
 
 export default () => {
 	const Stack = createStackNavigator();
@@ -26,9 +27,9 @@ export default () => {
 				component={AccountsScreen}
 				options={{
 					headerStyle: {
-						backgroundColor: "#00539F",
+						backgroundColor: colors.primary,
 					},
-					headerTintColor: "#fff",
+					headerTintColor: colors.primaryBackground,
 					headerTitleStyle: {
 						fontWeight: "bold",
 					},

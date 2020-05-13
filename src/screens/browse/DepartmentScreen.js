@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
 import mangoApi, { queries } from "../../api";
 import BrowseList from "../../components/browse/BrowseList";
 

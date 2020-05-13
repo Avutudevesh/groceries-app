@@ -19,14 +19,15 @@ import { Provider as BasketItemsProvider } from "./src/context/basketItemsContex
 import { navigationRef } from "./src/navigation/RootNavigation";
 import SplashScreen from "./src/screens/SplashScreen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { colors } from "./src/theme";
 
 const Tab = createBottomTabNavigator();
 const BottomNavigation = () => {
 	return (
 		<Tab.Navigator
 			tabBarOptions={{
-				activeTintColor: "#00539F",
-				inactiveTintColor: "black",
+				activeTintColor: colors.primary,
+				inactiveTintColor: colors.black,
 			}}
 		>
 			<Tab.Screen
@@ -105,9 +106,9 @@ const App = () => {
 				component={SignInScreen}
 				options={{
 					headerStyle: {
-						backgroundColor: "#00539F",
+						backgroundColor: colors.primary,
 					},
-					headerTintColor: "#fff",
+					headerTintColor: colors.primaryBackground,
 					headerTitleStyle: {
 						fontWeight: "bold",
 					},

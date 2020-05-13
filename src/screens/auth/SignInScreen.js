@@ -7,10 +7,10 @@ import {
 	Image,
 	ActivityIndicator,
 } from "react-native";
-import commonStyles from "../../styles";
 import Button from "../../components/Button";
 import { Context as AuthContext } from "../../context/authContext";
 import Dialog, { DialogContent } from "react-native-popup-dialog";
+import { commonStyles, colors } from "../../theme";
 
 export default () => {
 	const { state, signin } = useContext(AuthContext);
@@ -24,7 +24,7 @@ export default () => {
 				value={email}
 				placeholder="Email Address"
 				style={styles.inputField}
-				placeholderTextColor="#808080"
+				placeholderTextColor={colors.textInputPlaceholderColor}
 				onChangeText={setEmail}
 				autoCapitalize="none"
 				autoCorrect={false}
@@ -34,7 +34,7 @@ export default () => {
 				value={password}
 				placeholder="Password"
 				style={styles.inputField}
-				placeholderTextColor="#808080"
+				placeholderTextColor={colors.textInputPlaceholderColor}
 				onChangeText={setPassword}
 				autoCapitalize="none"
 				autoCorrect={false}
@@ -69,14 +69,14 @@ const styles = StyleSheet.create({
 	},
 	inputField: {
 		height: 50,
-		backgroundColor: "#F0F0F0",
+		backgroundColor: colors.textInputBackgroundColor,
 		marginVertical: 10,
 		borderBottomWidth: 1,
 		paddingLeft: 10,
 	},
 	linkText: {
 		...commonStyles.Text_H5,
-		color: "#00539F",
+		color: colors.primary,
 		marginVertical: 25,
 	},
 	errorText: {

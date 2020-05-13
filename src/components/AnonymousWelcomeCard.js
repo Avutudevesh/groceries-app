@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Button from "./Button";
-import commonStyles from "../styles";
 import { useNavigation } from "@react-navigation/native";
+import { colors, commonStyles } from "../theme";
 
 export default () => {
 	const navigation = useNavigation();
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 	},
 	subHeading: {
 		...commonStyles.Text_T2,
-		color: "#666666",
+		color: colors.subHeadingColor,
 		marginVertical: 10,
 	},
 });

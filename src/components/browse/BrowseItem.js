@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import commonStyles from "../../styles";
+import { colors, commonStyles } from "../../theme";
 
 export default ({ item }) => {
 	return (
@@ -15,11 +15,11 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		paddingVertical: 20,
 		borderBottomWidth: 0.5,
-		borderColor: "#D3D3D3",
+		borderColor: colors.browseItemBorderColor,
 		paddingLeft: 15,
 	},
 	textStyle: {
 		...commonStyles.Text_H5,
-		color: "#00539F",
+		color: colors.primary,
 	},
 });

@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
-import commonStyles from "../../styles";
+import { commonStyles } from "../../theme";
 
 export default ({ totalItems, guidePrice, isLoading, isError }) => {
 	return (

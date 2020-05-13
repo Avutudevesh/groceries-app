@@ -7,7 +7,7 @@ import {
 	ActivityIndicator,
 } from "react-native";
 import ProductCardVertical from "./ProductCardVertical";
-import commonStyles from "../styles";
+import { commonStyles, colors } from "../theme";
 
 export default ({ title, productItems, isLoading, isError }) => {
 	const setContent = () => {
@@ -33,7 +33,7 @@ export default ({ title, productItems, isLoading, isError }) => {
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: "white",
+		backgroundColor: colors.primaryBackground,
 		paddingBottom: 20,
 		marginBottom: 20,
 	},

@@ -3,6 +3,7 @@ import { Text } from "react-native";
 import mangoApi, { queries } from "../../api";
 import PLPList from "../PLPList";
 import { Context as BasketContext } from "../../context/basketItemsContext";
+import { colors } from "../../theme";
 
 export default () => {
 	const { mergeLocalAttributes } = useContext(BasketContext);
@@ -38,7 +39,7 @@ export default () => {
 					padding: 15,
 					fontWeight: "bold",
 					fontSize: 16,
-					color: "#666666",
+					color: colors.subHeadingColor,
 				}}
 			>{`${results.length} products`}</Text>
 			<PLPList

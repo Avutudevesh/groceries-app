@@ -112,5 +112,5 @@ export const { Context, Provider } = createDataContext(
 		removeItemFromBasket,
 		clearBasket,
 	},
-	{ items: [] }
+	{ items: [], guidePrice: 0 }
 );

@@ -8,13 +8,13 @@ import {
 } from "react-native";
 import AnonymousWelcomeCard from "../components/AnonymousWelcomeCard";
 import { FontAwesome5 } from "@expo/vector-icons";
-import commonStyles from "../styles";
 import { Context as AuthContext } from "../context/authContext";
 import { Context as BasketContext } from "../context/basketItemsContext";
 import FulfilmentCard from "../components/home/FulfilmentCard";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SpecialOfferCarousel from "../components/home/SpecialOfferCarousel";
 import FavouritesCarousel from "../components/home/FavouriesCarousel";
+import { colors, commonStyles } from "../theme";
 
 const HomeScreen = ({ navigation }) => {
 	navigation.setOptions({
@@ -23,7 +23,7 @@ const HomeScreen = ({ navigation }) => {
 				<MaterialCommunityIcons
 					name="account-outline"
 					size={35}
-					color="#00539F"
+					color={colors.primary}
 					style={{ marginRight: 10 }}
 				/>
 			</TouchableOpacity>
@@ -47,10 +47,10 @@ const HomeScreen = ({ navigation }) => {
 						<FontAwesome5
 							name="compass"
 							size={24}
-							color="#00539F"
+							color={colors.primary}
 							style={{ marginHorizontal: 15 }}
 						/>
-						<Text style={{ ...commonStyles.Text_H5, color: "#00539F" }}>
+						<Text style={{ ...commonStyles.Text_H5, color: colors.primary }}>
 							Browse all groceries
 						</Text>
 					</View>

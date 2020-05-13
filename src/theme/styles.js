@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import colors from "./colors";
 
 export default StyleSheet.create({
 	PrimaryButton: {
@@ -6,13 +7,13 @@ export default StyleSheet.create({
 		paddingHorizontal: 100,
 		marginVertical: 5,
 		marginHorizontal: 10,
-		backgroundColor: "#00539F",
+		backgroundColor: colors.primary,
 		borderRadius: 24,
 		borderWidth: 2,
-		borderColor: "#00539F",
+		borderColor: colors.primary,
 	},
 	PrimaryButtonText: {
-		color: "#fff",
+		color: colors.primaryBackground,
 		textAlign: "center",
 		fontWeight: "bold",
 	},
@@ -21,13 +22,13 @@ export default StyleSheet.create({
 		marginHorizontal: 10,
 		marginVertical: 5,
 		paddingHorizontal: 100,
-		backgroundColor: "#fff",
+		backgroundColor: colors.primaryBackground,
 		borderRadius: 24,
 		borderWidth: 2,
-		borderColor: "#00539F",
+		borderColor: colors.primary,
 	},
 	SecondaryButtonText: {
-		color: "#00539F",
+		color: colors.primary,
 		textAlign: "center",
 		fontWeight: "bold",
 	},
@@ -35,10 +36,10 @@ export default StyleSheet.create({
 		paddingVertical: 8,
 		paddingHorizontal: 20,
 		marginVertical: 5,
-		backgroundColor: "#00539F",
+		backgroundColor: colors.primary,
 		borderRadius: 24,
 		borderWidth: 2,
-		borderColor: "#00539F",
+		borderColor: colors.primary,
 		width: 110,
 	},
 	Text_H3: {

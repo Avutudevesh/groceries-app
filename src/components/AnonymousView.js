@@ -1,19 +1,15 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Button from "../components/Button";
-import commonStyles from "../styles";
 import { useNavigation } from "@react-navigation/native";
+import { colors, commonStyles } from "../theme";
 
 export default ({ title, subTitle }) => {
 	const navigation = useNavigation();
 	return (
 		<View style={styles.container}>
 			<Text style={commonStyles.Text_H5}>{title}</Text>
-			<Text
-				style={{ textAlign: "center", color: "#666666", marginVertical: 10 }}
-			>
-				{subTitle}
-			</Text>
+			<Text style={styles.subTitle}>{subTitle}</Text>
 			<Button
 				buttonStyle={commonStyles.PrimaryButton}
 				textStyle={commonStyles.PrimaryButtonText}
@@ -38,5 +34,10 @@ const styles = StyleSheet.create({
 	container: {
 		alignItems: "center",
 		marginHorizontal: 20,
+	},
+	subTitle: {
+		textAlign: "center",
+		color: colors.subHeadingColor,
+		marginVertical: 10,
 	},
 });

@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Platform, StatusBar } from "react-native";
+import { colors } from "../theme";
 
 export default ({ title }) => {
 	return (
@@ -13,7 +14,7 @@ const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 50 : StatusBar.currentHeight;
 
 const styles = StyleSheet.create({
 	toolBar: {
-		backgroundColor: "#00539F",
+		backgroundColor: colors.primary,
 		paddingVertical: 16,
 		paddingTop: STATUSBAR_HEIGHT,
 	},
