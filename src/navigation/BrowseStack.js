@@ -13,60 +13,34 @@ export default () => {
 			<Stack.Screen
 				name="SuperDepartment"
 				component={SuperDepartmentScreen}
-				options={{
-					headerStyle: {
-						backgroundColor: colors.primary,
-					},
-					headerTintColor: colors.primaryBackground,
-					headerTitleStyle: {
-						fontWeight: "bold",
-					},
-					title: "Browse",
-					headerBackTitleVisible: false,
-				}}
+				options={browseScreensOptions}
 			/>
 			<Stack.Screen
 				name="Department"
 				component={DepartmentScreen}
-				options={{
-					headerStyle: {
-						backgroundColor: colors.primary,
-					},
-					headerTintColor: colors.primaryBackground,
-					headerTitleStyle: {
-						fontWeight: "bold",
-					},
-					headerBackTitleVisible: false,
-				}}
+				options={browseScreensOptions}
 			/>
 			<Stack.Screen
 				name="Aisle"
 				component={AisleScreen}
-				options={{
-					headerStyle: {
-						backgroundColor: colors.primary,
-					},
-					headerTintColor: colors.primaryBackground,
-					headerTitleStyle: {
-						fontWeight: "bold",
-					},
-					headerBackTitleVisible: false,
-				}}
+				options={browseScreensOptions}
 			/>
 			<Stack.Screen
 				name="AislePLP"
 				component={AislePLPScreen}
-				options={{
-					headerStyle: {
-						backgroundColor: colors.primary,
-					},
-					headerTintColor: colors.primaryBackground,
-					headerTitleStyle: {
-						fontWeight: "bold",
-					},
-					headerBackTitleVisible: false,
-				}}
+				options={browseScreensOptions}
 			/>
 		</Stack.Navigator>
 	);
+};
+
+const browseScreensOptions = {
+	headerStyle: {
+		backgroundColor: colors.primary,
+	},
+	headerTintColor: colors.primaryBackground,
+	headerTitleStyle: {
+		fontWeight: "bold",
+	},
+	headerBackTitleVisible: false,
 };

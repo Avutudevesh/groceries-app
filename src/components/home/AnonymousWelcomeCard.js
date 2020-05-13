@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import Button from "./Button";
+import Button from "../Button";
 import { useNavigation } from "@react-navigation/native";
-import { colors, commonStyles } from "../theme";
+import { colors, commonStyles } from "../../theme";
 
 export default () => {
 	const navigation = useNavigation();

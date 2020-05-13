@@ -6,7 +6,7 @@ import {
 	ScrollView,
 	TouchableOpacity,
 } from "react-native";
-import AnonymousWelcomeCard from "../components/AnonymousWelcomeCard";
+import AnonymousWelcomeCard from "../components/home/AnonymousWelcomeCard";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Context as AuthContext } from "../context/authContext";
 import { Context as BasketContext } from "../context/basketItemsContext";
