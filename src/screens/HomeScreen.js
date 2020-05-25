@@ -1,20 +1,15 @@
 import React, { useContext, useEffect } from "react";
-import {
-	Text,
-	View,
-	StyleSheet,
-	ScrollView,
-	TouchableOpacity,
-} from "react-native";
+import { View, ScrollView, TouchableOpacity } from "react-native";
 import AnonymousWelcomeCard from "../components/home/AnonymousWelcomeCard";
-import { FontAwesome5 } from "@expo/vector-icons";
 import { Context as AuthContext } from "../context/authContext";
 import { Context as BasketContext } from "../context/basketItemsContext";
 import FulfilmentCard from "../components/home/FulfilmentCard";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SpecialOfferCarousel from "../components/home/SpecialOfferCarousel";
 import FavouritesCarousel from "../components/home/FavouriesCarousel";
-import { colors, commonStyles } from "../theme";
+import { colors } from "../theme";
+import BrowseTile from "../components/home/BrowseTile";
+import ShopByCategory from "../components/home/ShopByCategory";
 
 const HomeScreen = (props) => {
 	props.navigation.setOptions({
@@ -38,39 +33,17 @@ const HomeScreen = (props) => {
 			clearBasket();
 		}
 	}, [state]);
-	console.log("Form Home");
-	console.log(props);
+
 	return (
 		<View>
 			<ScrollView>
 				{state.access_token ? <FulfilmentCard /> : <AnonymousWelcomeCard />}
-				<TouchableOpacity onPress={() => props.navigation.navigate("Browse")}>
-					<View style={styles.browseContainer}>
-						<FontAwesome5
-							name="compass"
-							size={24}
-							color={colors.primary}
-							style={{ marginHorizontal: 15 }}
-						/>
-						<Text style={{ ...commonStyles.Text_H5, color: colors.primary }}>
-							Browse all groceries
-						</Text>
-					</View>
-				</TouchableOpacity>
+				<ShopByCategory />
 				{state.access_token ? <FavouritesCarousel /> : null}
 				<SpecialOfferCarousel />
 			</ScrollView>
 		</View>
 	);
 };
-
-const styles = StyleSheet.create({
-	browseContainer: {
-		marginVertical: 20,
-		paddingVertical: 10,
-		backgroundColor: "white",
-		flexDirection: "row",
-	},
-});
 
 export default HomeScreen;
