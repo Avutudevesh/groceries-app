@@ -1,43 +1,22 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import ProductCarousel from "../ProductCarousel";
-import mangoApi, { queries } from "../../api";
+import query from "../../graphql/GetProductsForPromotionType";
 import { Context as BasketContext } from "../../context/basketItemsContext";
-
+import useResults from "../../hooks/useResults";
 export default () => {
 	const { mergeLocalAttributes } = useContext(BasketContext);
-	const [results, setResults] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
-	const [isError, setIsError] = useState(false);
-	const specialOfferApi = async () => {
-		try {
-			setIsLoading(true);
-			const result = await mangoApi.post("/q/", {
-				query: queries.GET_PRODUCTS_FOR_PROMOTION_TYPE_QUERY,
-				variables: {
-					promotionType: "all",
-					count: 24,
-				},
-			});
-			setResults(result.data.data.promotionType.productItems);
-			setIsLoading(false);
-		} catch (err) {
-			setIsError(true);
-			setIsLoading(false);
-			if (err.response) {
-				console.log(err.response);
-			}
-		}
-	};
-	useEffect(() => {
-		specialOfferApi();
-	}, []);
-
+	const { loading, error, data } = useResults(query, {
+		promotionType: "all",
+		count: 24,
+	});
 	return (
 		<ProductCarousel
 			title="Special Offers"
-			productItems={results ? mergeLocalAttributes(results) : []}
-			isError={isError}
-			isLoading={isLoading}
+			productItems={
+				data ? mergeLocalAttributes(data.data.promotionType.productItems) : []
+			}
+			isError={error}
+			isLoading={loading}
 		/>
 	);
 };

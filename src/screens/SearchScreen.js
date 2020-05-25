@@ -1,38 +1,20 @@
 import React, { useState, useContext } from "react";
 import { Text, View, StyleSheet, Platform, StatusBar } from "react-native";
-import mangoApi, { queries } from "../api";
 import PLPList from "../components/PLPList";
 import { Context as BasketContext } from "../context/basketItemsContext";
 import { SearchBar } from "react-native-elements";
 import { commonStyles, colors } from "../theme";
+import useResults from "../hooks/useResults";
+import query from "../graphql/SearchProduct";
 
 const SearchScreen = () => {
-	const [term, setTerm] = useState("");
-	const [results, setResults] = useState(null);
-	const [isLoading, setIsLoading] = useState(false);
-	const [isError, setIsError] = useState(false);
 	const { mergeLocalAttributes } = useContext(BasketContext);
-	const searchProduct = async () => {
-		try {
-			setIsLoading(true);
-			const response = await mangoApi.post("/q/", {
-				query: queries.SEARCH_QUERY,
-				variables: {
-					query: term,
-				},
-			});
-			setResults(response.data.data.search.productItems);
-			setIsLoading(false);
-		} catch (err) {
-			console.log(err);
-			setIsLoading(false);
-			setIsError(true);
-			setResults([]);
-			if (err.response) {
-				console.log(err.response);
-			}
-		}
-	};
+	const [term, setTerm] = useState("");
+	const { loading, error, data, lazyFetchResults } = useResults(
+		query,
+		null,
+		true
+	);
 	const initialScreen = () => (
 		<View style={styles.searchEmptyContainer}>
 			<Text style={styles.searchHeading}>Search Groceries</Text>
@@ -41,9 +23,11 @@ const SearchScreen = () => {
 	);
 	const searchProductsScreen = () => (
 		<PLPList
-			productItems={results ? mergeLocalAttributes(results) : []}
-			isLoading={isLoading}
-			isError={isError}
+			productItems={
+				data ? mergeLocalAttributes(data.data.search.productItems) : []
+			}
+			isLoading={loading}
+			isError={error}
 		/>
 	);
 	return (
@@ -51,14 +35,14 @@ const SearchScreen = () => {
 			<SearchBar
 				placeholder="Search for a product"
 				onChangeText={setTerm}
-				onSubmitEditing={searchProduct}
+				onSubmitEditing={() => lazyFetchResults({ query: term })}
 				value={term}
 				containerStyle={styles.searchContainer}
 				inputContainerStyle={styles.searchInputContainer}
 				placeholderTextColor={colors.textInputPlaceholderColor}
 				inputStyle={{ color: colors.textInputPlaceholderColor }}
 			/>
-			{results != null || isLoading ? searchProductsScreen() : initialScreen()}
+			{data != null || loading ? searchProductsScreen() : initialScreen()}
 		</View>
 	);
 };

@@ -40,6 +40,7 @@ const App = () => {
 		</Root.Navigator>
 	);
 };
+
 export default () => {
 	return (
 		<NavigationContainer ref={navigationRef}>

@@ -1,5 +1,6 @@
 import createDataContext from "./createDataContext";
-import mangoApi, { queries } from "../api";
+import mangoApi from "../api";
+import query from "../graphql/UpdateItems";
 
 const itemsReducer = (state, action) => {
 	switch (action.type) {
@@ -19,7 +20,7 @@ const itemsReducer = (state, action) => {
 const fetchBasket = (dispatch) => async () => {
 	try {
 		const response = await mangoApi.post("/q/", {
-			query: queries.UPDATE_ITEMS,
+			query,
 		});
 		dispatch({
 			type: "fetch_basket",
@@ -81,7 +82,7 @@ const removeItemFromBasket = (dispatch, state) => (item) => {
 const updateItems = async (dispatch, id, newValue, oldValue) => {
 	try {
 		const response = await mangoApi.post("/q/", {
-			query: queries.UPDATE_ITEMS,
+			query,
 			variables: {
 				items: [
 					{

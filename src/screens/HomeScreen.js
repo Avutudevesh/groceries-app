@@ -16,10 +16,10 @@ import SpecialOfferCarousel from "../components/home/SpecialOfferCarousel";
 import FavouritesCarousel from "../components/home/FavouriesCarousel";
 import { colors, commonStyles } from "../theme";
 
-const HomeScreen = ({ navigation }) => {
-	navigation.setOptions({
+const HomeScreen = (props) => {
+	props.navigation.setOptions({
 		headerRight: () => (
-			<TouchableOpacity onPress={() => navigation.navigate("Account")}>
+			<TouchableOpacity onPress={() => props.navigation.navigate("Account")}>
 				<MaterialCommunityIcons
 					name="account-outline"
 					size={35}
@@ -38,11 +38,13 @@ const HomeScreen = ({ navigation }) => {
 			clearBasket();
 		}
 	}, [state]);
+	console.log("Form Home");
+	console.log(props);
 	return (
 		<View>
 			<ScrollView>
 				{state.access_token ? <FulfilmentCard /> : <AnonymousWelcomeCard />}
-				<TouchableOpacity onPress={() => navigation.navigate("Browse")}>
+				<TouchableOpacity onPress={() => props.navigation.navigate("Browse")}>
 					<View style={styles.browseContainer}>
 						<FontAwesome5
 							name="compass"

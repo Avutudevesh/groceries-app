@@ -1,34 +1,15 @@
-import React, { useState, useEffect } from "react";
-import mangoApi, { queries } from "../../api";
+import React from "react";
 import BrowseList from "../../components/browse/BrowseList";
+import query from "../../graphql/TaxonomyForCategory";
+import useResults from "../../hooks/useResults";
 
 export default ({ route, navigation }) => {
 	const { id, name } = route.params;
 	navigation.setOptions({ title: name });
-	const [results, setResults] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
-	const [isError, setIsError] = useState(false);
-	const departmentApi = async () => {
-		try {
-			setIsLoading(true);
-			const response = await mangoApi.post("/q/", {
-				query: queries.TAXONOMY_FOR_CATEGORY,
-				variables: {
-					business: "grocery",
-					categoryId: id,
-				},
-			});
-			setResults(response.data.data.taxonomy[0].children);
-			setIsLoading(false);
-		} catch (err) {
-			setIsLoading(false);
-			setIsError(true);
-			console.log(err);
-		}
-	};
-	useEffect(() => {
-		departmentApi();
-	}, []);
+	const { loading, error, data } = useResults(query, {
+		business: "grocery",
+		categoryId: id,
+	});
 
 	const onItemSelected = (item) => {
 		navigation.navigate("AislePLP", {
@@ -38,10 +19,10 @@ export default ({ route, navigation }) => {
 	};
 	return (
 		<BrowseList
-			results={results}
+			results={data ? data.data.taxonomy[0].children : []}
 			onItemSelected={onItemSelected}
-			isLoading={isLoading}
-			isError={isError}
+			isLoading={loading}
+			isError={error}
 		/>
 	);
 };

@@ -1,8 +1,45 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import mangoApi from "../api";
 
-//TODO: Make this reusable hook to make network request
-export default ({ initialValue }) => {
-	const [isLoading, setIsLoading] = useState(true);
-	const [isError, setIsError] = useState(false);
-	const [results, setResults] = useState(initialValue);
+export default (query, variables, isLazyFetch = false) => {
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(null);
+	const [data, setData] = useState(null);
+	useEffect(() => {
+		if (isLazyFetch) return;
+		fetchResults();
+	}, []);
+	const fetchResults = async () => {
+		try {
+			setLoading(true);
+			const response = await mangoApi.post("/q/", {
+				query,
+				variables,
+			});
+			setData(response.data);
+			setLoading(false);
+		} catch (err) {
+			setLoading(false);
+			setError(err);
+			console.log(err);
+		}
+	};
+
+	const lazyFetchResults = async (lazyVariables) => {
+		try {
+			setLoading(true);
+			const response = await mangoApi.post("/q/", {
+				query,
+				variables: lazyVariables,
+			});
+			setData(response.data);
+			setLoading(false);
+		} catch (err) {
+			setLoading(false);
+			setError(err);
+			console.log(err);
+		}
+	};
+
+	return { loading, error, data, lazyFetchResults };
 };

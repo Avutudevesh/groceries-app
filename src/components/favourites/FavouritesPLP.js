@@ -1,37 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Text } from "react-native";
-import mangoApi, { queries } from "../../api";
 import PLPList from "../PLPList";
 import { Context as BasketContext } from "../../context/basketItemsContext";
 import { colors } from "../../theme";
+import query from "../../graphql/GetFavourites";
+import useResults from "../../hooks/useResults";
 
 export default () => {
 	const { mergeLocalAttributes } = useContext(BasketContext);
-	const [results, setResults] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
-	const [isError, setIsError] = useState(false);
-	const favouritesApi = async () => {
-		try {
-			setIsLoading(true);
-			const response = await mangoApi.post("/q/", {
-				query: queries.GET_FAVOURITES,
-				variables: {
-					count: 24,
-				},
-			});
-			setResults(response.data.data.favourites.productItems);
-			setIsLoading(false);
-		} catch (err) {
-			setIsLoading(false);
-			setIsError(true);
-			if (err.response) {
-				console.log(err.response);
-			}
-		}
-	};
-	useEffect(() => {
-		favouritesApi();
-	}, []);
+	const { loading, error, data } = useResults(query, { count: 24 });
 	return (
 		<>
 			<Text
@@ -41,11 +18,15 @@ export default () => {
 					fontSize: 16,
 					color: colors.subHeadingColor,
 				}}
-			>{`${results.length} products`}</Text>
+			>
+				{`${data ? data.data.favourites.productItems.length : 0} products`}
+			</Text>
 			<PLPList
-				productItems={results ? mergeLocalAttributes(results) : []}
-				isLoading={isLoading}
-				isError={isError}
+				productItems={
+					data ? mergeLocalAttributes(data.data.favourites.productItems) : []
+				}
+				isLoading={loading}
+				isError={error}
 			/>
 		</>
 	);

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { TouchableOpacity } from "react-native";
-import mangoApi, { queries } from "../../api";
+import query from "../../graphql/TaxonomySuperDepartments";
 import { Ionicons } from "@expo/vector-icons";
 import BrowseList from "../../components/browse/BrowseList";
+import useResults from "../../hooks/useResults";
 
 export default ({ navigation }) => {
 	navigation.setOptions({
@@ -19,41 +20,21 @@ export default ({ navigation }) => {
 			);
 		},
 	});
-	const [results, setResults] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
-	const [isError, setIsError] = useState(false);
-	const superDepartmentApi = async () => {
-		try {
-			setIsLoading(true);
-			const response = await mangoApi.post("/q/", {
-				query: queries.TAXONOMY_SUPER_DEPARTMENT_QUERY,
-				variables: {
-					business: "grocery",
-				},
-			});
-			setResults(response.data.data.taxonomy);
-			setIsLoading(false);
-		} catch (err) {
-			setIsLoading(false);
-			setIsError(true);
-			console.log(err);
-		}
-	};
-	useEffect(() => {
-		superDepartmentApi();
-	}, []);
+
+	const { loading, error, data } = useResults(query, { business: "grocery" });
 	const onItemSelected = (item) => {
 		navigation.navigate("Department", {
 			id: item.id,
 			name: item.name,
 		});
 	};
+	console.log(data);
 	return (
 		<BrowseList
-			results={results}
+			results={data ? data.data.taxonomy : null}
 			onItemSelected={onItemSelected}
-			isLoading={isLoading}
-			isError={isError}
+			isLoading={loading}
+			isError={error}
 		/>
 	);
 };
