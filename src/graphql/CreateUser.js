@@ -23,13 +23,9 @@ const query = `mutation CreateUser(
         state:$state
       }
     }){
-      _id,
-      email,
-      name,
-      phone,
-      address{
-        city,
-      }
+      userId,
+      token,
+      tokenExpiration
     }
   }`;
 

@@ -15,7 +15,6 @@ export default () => {
 				textStyle={commonStyles.PrimaryButtonText}
 				text="SignIn"
 				onClick={() => {
-					console.log("clicked");
 					navigation.navigate("SignIn");
 				}}
 			/>
@@ -24,8 +23,7 @@ export default () => {
 				textStyle={commonStyles.SecondaryButtonText}
 				text="Register"
 				onClick={() => {
-					console.log("clicked");
-					navigation.navigate("SignIn");
+					navigation.navigate("Register");
 				}}
 			/>
 		</View>

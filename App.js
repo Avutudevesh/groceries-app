@@ -2,6 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import SignInScreen from "./src/screens/auth/SignInScreen";
+import RegistrationScreen from "./src/screens/auth/RegistrationScreen";
 import { Provider as AuthProvider } from "./src/context/authContext";
 import { Provider as BasketItemsProvider } from "./src/context/basketItemsContext";
 import { navigationRef } from "./src/navigation/RootNavigation";
@@ -26,6 +27,20 @@ const App = () => {
 			<Root.Screen
 				name="SignIn"
 				component={SignInScreen}
+				options={{
+					headerStyle: {
+						backgroundColor: colors.primary,
+					},
+					headerTintColor: colors.primaryBackground,
+					headerTitleStyle: {
+						fontWeight: "bold",
+					},
+					headerBackTitleVisible: false,
+				}}
+			/>
+			<Root.Screen
+				name="Register"
+				component={RegistrationScreen}
 				options={{
 					headerStyle: {
 						backgroundColor: colors.primary,
