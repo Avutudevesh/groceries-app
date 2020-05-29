@@ -1,9 +1,8 @@
 import { AsyncStorage } from "react-native";
 import mangoApi from "../api";
-import signInRequestBody from "../api/auth/signInRequest";
 import createDataContext from "./createDataContext";
-import keys from "../../keys";
 import navigate from "../navigation/RootNavigation";
+import query from "../graphql/Authenticate";
 
 const authReducer = (state, action) => {
 	switch (action.type) {
@@ -27,14 +26,19 @@ const authReducer = (state, action) => {
 const signin = (dispatch) => async (email, password) => {
 	try {
 		dispatch({ type: "signin" });
-		const response = await mangoApi.post(
-			"/api/v3/identify",
-			signInRequestBody(email, password),
-			{ headers: { "ighs-appkey": `${keys.IDENTITY_CLIENT_ID}` } }
-		);
-		console.log(response.data.access_token);
-		await AsyncStorage.setItem("access_token", response.data.access_token);
-		dispatch({ type: "signin_success", payload: response.data.access_token });
+		const response = await mangoApi.post("/", {
+			query,
+			variables: {
+				email,
+				password,
+			},
+		});
+		console.log(response.data.data.login.token);
+		await AsyncStorage.setItem("access_token", response.data.data.login.token);
+		dispatch({
+			type: "signin_success",
+			payload: response.data.data.login.token,
+		});
 		navigate("BottomNavigation");
 	} catch (e) {
 		dispatch({ type: "signin_error" });
