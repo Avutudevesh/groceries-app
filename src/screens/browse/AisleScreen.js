@@ -4,11 +4,10 @@ import query from "../../graphql/TaxonomyForCategory";
 import useResults from "../../hooks/useResults";
 
 export default ({ route, navigation }) => {
-	const { id, name } = route.params;
+	const { _id, id, name } = route.params;
 	navigation.setOptions({ title: name });
 	const { loading, error, data } = useResults(query, {
-		business: "grocery",
-		categoryId: id,
+		id: _id,
 	});
 
 	const onItemSelected = (item) => {
@@ -19,7 +18,7 @@ export default ({ route, navigation }) => {
 	};
 	return (
 		<BrowseList
-			results={data ? data.data.taxonomy[0].children : []}
+			results={data ? data.data.subcategories : []}
 			onItemSelected={onItemSelected}
 			isLoading={loading}
 			isError={error}

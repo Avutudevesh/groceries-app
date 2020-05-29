@@ -8,16 +8,13 @@ export default ({ item }) => {
 	const onItemSelected = () => {
 		navigation.navigate("Browse", {
 			screen: "Department",
-			params: { id: item.id, name: item.name },
+			params: { _id: item._id, id: item.id, name: item.name },
 		});
 	};
 	return (
 		<TouchableOpacity onPress={onItemSelected}>
 			<View style={styles.container}>
-				<Image
-					source={{ uri: item.images[0].images[0].url }}
-					style={styles.imageStyle}
-				/>
+				<Image source={{ uri: item.iconImage }} style={styles.imageStyle} />
 				<Text style={styles.textStyle}>{item.name}</Text>
 			</View>
 		</TouchableOpacity>
@@ -37,6 +34,7 @@ const styles = StyleSheet.create({
 	imageStyle: {
 		height: 100,
 		width: 110,
+		backgroundColor: "white",
 	},
 	textStyle: {
 		fontSize: 14,

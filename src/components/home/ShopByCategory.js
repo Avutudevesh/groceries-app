@@ -1,7 +1,7 @@
 import React from "react";
 import { View, FlatList, Text, StyleSheet } from "react-native";
 import useResults from "../../hooks/useResults";
-import query from "../../graphql/TaxonomySuperDepartments";
+import query from "../../graphql/TaxonomyDepartments";
 import CategoryItem from "./CategoryItem";
 import { colors, commonStyles } from "../../theme";
 export default () => {
@@ -11,8 +11,8 @@ export default () => {
 		<View style={styles.container}>
 			<Text style={styles.textStyle}>Shop by Category</Text>
 			<FlatList
-				data={data.data.taxonomy}
-				keyExtractor={(item) => item.id}
+				data={data.data.departments}
+				keyExtractor={(item) => item._id}
 				renderItem={({ item }) => {
 					return <CategoryItem item={item} />;
 				}}

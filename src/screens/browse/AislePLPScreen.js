@@ -9,15 +9,12 @@ export default ({ route, navigation }) => {
 	const { id, name } = route.params;
 	navigation.setOptions({ title: name });
 	const { loading, error, data } = useResults(query, {
-		business: "grocery",
-		facet: id,
+		shelfId: id,
 	});
 
 	return (
 		<PLPList
-			productItems={
-				data ? mergeLocalAttributes(data.data.category.productItems) : []
-			}
+			productItems={data ? data.data.categoryProducts : []}
 			isLoading={loading}
 			isError={error}
 		/>
