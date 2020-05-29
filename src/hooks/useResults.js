@@ -12,7 +12,7 @@ export default (query, variables, isLazyFetch = false) => {
 	const fetchResults = async () => {
 		try {
 			setLoading(true);
-			const response = await mangoApi.post("/q/", {
+			const response = await mangoApi.post("/", {
 				query,
 				variables,
 			});
@@ -28,7 +28,7 @@ export default (query, variables, isLazyFetch = false) => {
 	const lazyFetchResults = async (lazyVariables) => {
 		try {
 			setLoading(true);
-			const response = await mangoApi.post("/q/", {
+			const response = await mangoApi.post("/", {
 				query,
 				variables: lazyVariables,
 			});

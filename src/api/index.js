@@ -1,14 +1,8 @@
 import axios from "axios";
 import { AsyncStorage } from "react-native";
-import keys from "../../keys";
 
 const instance = axios.create({
-	baseURL: "https://api.tesco.com/shoppingexperiencealpha",
-	headers: {
-		region: "MY",
-		"X-APIKEY": `${keys.APIGEE_API_KEY}`,
-		"ighs-language": "en-GB",
-	},
+	baseURL: "http://74a7a7b5e44e.ngrok.io/graphql",
 });
 
 instance.interceptors.request.use(

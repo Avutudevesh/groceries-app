@@ -15,7 +15,7 @@ export default ({ title, productItems, isLoading, isError }) => {
 			<FlatList
 				horizontal
 				data={productItems}
-				keyExtractor={(item) => item.product.id}
+				keyExtractor={(item) => item._id}
 				renderItem={({ item }) => {
 					return <ProductCardVertical item={item} />;
 				}}
