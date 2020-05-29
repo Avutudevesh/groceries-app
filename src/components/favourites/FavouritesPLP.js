@@ -8,7 +8,7 @@ import useResults from "../../hooks/useResults";
 
 export default () => {
 	const { mergeLocalAttributes } = useContext(BasketContext);
-	const { loading, error, data } = useResults(query, { count: 24 });
+	const { loading, error, data } = useResults(query);
 	return (
 		<>
 			<Text
@@ -19,12 +19,10 @@ export default () => {
 					color: colors.subHeadingColor,
 				}}
 			>
-				{`${data ? data.data.favourites.productItems.length : 0} products`}
+				{`${data ? data.data.favourites.length : 0} products`}
 			</Text>
 			<PLPList
-				productItems={
-					data ? mergeLocalAttributes(data.data.favourites.productItems) : []
-				}
+				productItems={data ? data.data.favourites : []}
 				isLoading={loading}
 				isError={error}
 			/>

@@ -6,14 +6,12 @@ import useResults from "../../hooks/useResults";
 
 export default () => {
 	const { mergeLocalAttributes } = useContext(BasketContext);
-	const { loading, error, data } = useResults(query, { count: 24 });
+	const { loading, error, data } = useResults(query);
 
 	return (
 		<ProductCarousel
 			title="Favourites"
-			productItems={
-				data ? mergeLocalAttributes(data.data.favourites.productItems) : []
-			}
+			productItems={data ? data.data.favourites : []}
 			isError={error}
 			isLoading={loading}
 		/>
