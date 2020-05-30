@@ -11,7 +11,7 @@ export default () => {
 	return (
 		<ProductCarousel
 			title="Favourites"
-			productItems={data ? data.data.favourites : []}
+			productItems={data ? mergeLocalAttributes(data.data.favourites) : []}
 			isError={error}
 			isLoading={loading}
 		/>

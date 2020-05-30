@@ -11,7 +11,7 @@ export default ({ item }) => {
 		<View style={styles.container}>
 			<Image
 				source={{
-					uri: item.imageUrl,
+					uri: item.product.imageUrl,
 				}}
 				style={styles.imageStyle}
 			/>
@@ -21,12 +21,12 @@ export default ({ item }) => {
 					numberOfLines={2}
 					ellipsizeMode="tail"
 				>
-					{item.title}
+					{item.product.title}
 				</Text>
 				<View>
 					<View style={styles.priceViewStyle}>
-						<Text style={commonStyles.Text_H5}>{item.newPrice}</Text>
-						<Text style={commonStyles.Text_T4}>{item.quantity}</Text>
+						<Text style={commonStyles.Text_H5}>{item.product.newPrice}</Text>
+						<Text style={commonStyles.Text_T4}>{item.product.quantity}</Text>
 					</View>
 					{renderButton(item, addItemToBasket, removeItemFromBasket)}
 				</View>
@@ -36,7 +36,7 @@ export default ({ item }) => {
 };
 
 const renderButton = (item, addClickAction, removeClickAction) => {
-	if (item.basketQuantity) {
+	if (item.quantity) {
 		return (
 			<View style={styles.buttonsContainer}>
 				<TouchableOpacity onPress={() => removeClickAction(item)}>

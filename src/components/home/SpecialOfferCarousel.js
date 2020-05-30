@@ -10,7 +10,9 @@ export default () => {
 	return (
 		<ProductCarousel
 			title="Special Offers"
-			productItems={data ? data.data.specialOfferProducts : []}
+			productItems={
+				data ? mergeLocalAttributes(data.data.specialOfferProducts) : []
+			}
 			isError={error}
 			isLoading={loading}
 		/>

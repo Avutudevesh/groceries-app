@@ -1,6 +1,7 @@
 import createDataContext from "./createDataContext";
 import mangoApi from "../api";
-import query from "../graphql/UpdateItems";
+import query from "../graphql/UpdateBasket";
+import fetchQuery from "../graphql/FetchBasket";
 
 const itemsReducer = (state, action) => {
 	switch (action.type) {
@@ -19,12 +20,12 @@ const itemsReducer = (state, action) => {
 
 const fetchBasket = (dispatch) => async () => {
 	try {
-		const response = await mangoApi.post("/q/", {
-			query,
+		const response = await mangoApi.post("/", {
+			query: fetchQuery,
 		});
 		dispatch({
 			type: "fetch_basket",
-			payload: response.data.data.basket.items,
+			payload: response.data.data.basket,
 		});
 	} catch (e) {
 		console.log(e);
@@ -38,24 +39,24 @@ const clearBasket = (dispatch) => () => {
 const mergeLocalAttributes = (dispatch, state) => (productItems) => {
 	const mergedProductItems = productItems.map((item) => {
 		const basketItem = state.items.find((ele) => {
-			return ele.product.id === item.id;
+			return ele.product._id === item._id;
 		});
 		if (basketItem) {
 			return {
 				product: item,
 				quantity: basketItem.quantity,
-				weight: basketItem.weight,
 			};
 		}
-		return { product: item, quantity: 0, weight: 0 };
+		return { product: item, quantity: 0 };
 	});
 	return mergedProductItems;
 };
 
 const addItemToBasket = (dispatch, state) => (item) => {
+	console.log(item);
 	let productInBasket = false;
 	const updatedItems = state.items.map((ele) => {
-		if (ele.product.id === item.product.id) {
+		if (ele.product._id === item.product._id) {
 			productInBasket = true;
 			return { ...ele, quantity: ele.quantity + 1 };
 		}
@@ -65,39 +66,32 @@ const addItemToBasket = (dispatch, state) => (item) => {
 		updatedItems.push({ ...item, quantity: item.quantity + 1 });
 	}
 	dispatch({ type: "add_to_basket", payload: updatedItems });
-	updateItems(dispatch, item.product.id, item.quantity + 1, item.quantity);
+	updateItems(dispatch, item.product._id, item.quantity + 1);
 };
 
 const removeItemFromBasket = (dispatch, state) => (item) => {
 	const updatedItems = state.items.map((ele) => {
-		if (ele.product.id === item.product.id) {
+		if (ele.product._id === item.product._id) {
 			return { ...ele, quantity: ele.quantity - 1 };
 		}
 		return ele;
 	});
 	dispatch({ type: "remove_from_basket", payload: updatedItems });
-	updateItems(dispatch, item.product.id, item.quantity - 1, item.quantity);
+	updateItems(dispatch, item.product._id, item.quantity - 1);
 };
 
-const updateItems = async (dispatch, id, newValue, oldValue) => {
+const updateItems = async (dispatch, _id, newValue) => {
 	try {
-		const response = await mangoApi.post("/q/", {
+		const response = await mangoApi.post("/", {
 			query,
 			variables: {
-				items: [
-					{
-						id,
-						oldValue,
-						newValue,
-						oldUnitChoice: "pcs",
-						newUnitChoice: "pcs",
-					},
-				],
+				quantity: newValue,
+				_id,
 			},
 		});
 		dispatch({
 			type: "fetch_basket",
-			payload: response.data.data.basket.items,
+			payload: response.data.data.updateBasket,
 		});
 	} catch (e) {
 		console.log(e);

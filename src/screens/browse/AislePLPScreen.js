@@ -14,7 +14,9 @@ export default ({ route, navigation }) => {
 
 	return (
 		<PLPList
-			productItems={data ? data.data.categoryProducts : []}
+			productItems={
+				data ? mergeLocalAttributes(data.data.categoryProducts) : []
+			}
 			isLoading={loading}
 			isError={error}
 		/>

@@ -23,7 +23,7 @@ const SearchScreen = () => {
 	);
 	const searchProductsScreen = () => (
 		<PLPList
-			productItems={data ? data.data.search : []}
+			productItems={data ? mergeLocalAttributes(data.data.search) : []}
 			isLoading={loading}
 			isError={error}
 		/>
