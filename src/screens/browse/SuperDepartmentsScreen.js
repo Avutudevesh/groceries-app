@@ -1,9 +1,9 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
-import query from "../../graphql/TaxonomySuperDepartments";
 import { Ionicons } from "@expo/vector-icons";
 import BrowseList from "../../components/browse/BrowseList";
 import useResults from "../../hooks/useResults";
+import query from "../../graphql/TaxonomyDepartments";
 
 export default ({ navigation }) => {
 	navigation.setOptions({
@@ -31,7 +31,7 @@ export default ({ navigation }) => {
 	console.log(data);
 	return (
 		<BrowseList
-			results={data ? data.data.taxonomy : null}
+			results={data ? data.data.departments : null}
 			onItemSelected={onItemSelected}
 			isLoading={loading}
 			isError={error}
