@@ -11,12 +11,13 @@ export default () => {
 		<View style={styles.container}>
 			<Text style={styles.textStyle}>Shop by Category</Text>
 			<FlatList
+				horizontal
 				data={data.data.departments}
 				keyExtractor={(item) => item._id}
 				renderItem={({ item }) => {
 					return <CategoryItem item={item} />;
 				}}
-				numColumns={3}
+				showsHorizontalScrollIndicator={false}
 			/>
 		</View>
 	);
@@ -27,13 +28,11 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		marginVertical: 10,
 		paddingHorizontal: 10,
-		alignItems: "center",
 	},
 	textStyle: {
-		...commonStyles.Text_H4,
+		...commonStyles.Text_H5,
 		color: "black",
-		alignContent: "center",
 		paddingVertical: 10,
-		textAlign: "center",
+		paddingHorizontal: 20,
 	},
 });

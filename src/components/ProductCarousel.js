@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 		marginBottom: 20,
 	},
 	title: {
-		...commonStyles.Text_H4,
+		...commonStyles.Text_H5,
 		paddingVertical: 15,
 		paddingHorizontal: 20,
 	},

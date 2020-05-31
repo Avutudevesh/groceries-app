@@ -1,5 +1,4 @@
 import React from "react";
-import { Image } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../screens/HomeScreen";
 import BrowseStack from "./BrowseStack";
@@ -14,7 +13,7 @@ export default () => {
 				name="HomeScreen"
 				component={HomeScreen}
 				options={{
-					headerTitle: (props) => <LogoHeader {...props} />,
+					header: () => null,
 				}}
 			/>
 			<Stack.Screen
@@ -38,8 +37,4 @@ export default () => {
 			/>
 		</Stack.Navigator>
 	);
-};
-
-const LogoHeader = (props) => {
-	return <Image source={require("../../assets/tesco_logo.png")} />;
 };

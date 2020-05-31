@@ -4,6 +4,7 @@ import Button from "../components/Button";
 import { Ionicons } from "@expo/vector-icons";
 import { Context as BasketContext } from "../context/basketItemsContext";
 import { colors, commonStyles } from "../theme";
+import { AntDesign } from "@expo/vector-icons";
 
 export default ({ productItem }) => {
 	const { addItemToBasket, removeItemFromBasket } = useContext(BasketContext);
@@ -44,11 +45,7 @@ const renderButton = (item, addClickAction, removeClickAction) => {
 		return (
 			<View style={styles.buttonsContainer}>
 				<TouchableOpacity onPress={() => removeClickAction(item)}>
-					<Ionicons
-						name="ios-remove-circle-outline"
-						size={35}
-						color={colors.primary}
-					/>
+					<AntDesign name="minussquareo" size={30} color={colors.primary} />
 				</TouchableOpacity>
 				<Text style={styles.quantityText}>{item.quantity}</Text>
 				<TouchableOpacity
@@ -56,7 +53,7 @@ const renderButton = (item, addClickAction, removeClickAction) => {
 						addClickAction(item);
 					}}
 				>
-					<Ionicons name="ios-add-circle" size={35} color={colors.primary} />
+					<AntDesign name="plussquare" size={30} color={colors.primary} />
 				</TouchableOpacity>
 			</View>
 		);

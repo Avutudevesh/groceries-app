@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Text, Image, View, StyleSheet, TouchableOpacity } from "react-native";
 import Button from "./Button";
-import { Ionicons } from "@expo/vector-icons";
 import { Context as BasketContext } from "../context/basketItemsContext";
 import { colors, commonStyles } from "../theme";
+import { AntDesign } from "@expo/vector-icons";
 
 export default ({ item }) => {
 	const { addItemToBasket, removeItemFromBasket } = useContext(BasketContext);
@@ -40,11 +40,7 @@ const renderButton = (item, addClickAction, removeClickAction) => {
 		return (
 			<View style={styles.buttonsContainer}>
 				<TouchableOpacity onPress={() => removeClickAction(item)}>
-					<Ionicons
-						name="ios-remove-circle-outline"
-						size={35}
-						color={colors.primary}
-					/>
+					<AntDesign name="minussquareo" size={30} color={colors.primary} />
 				</TouchableOpacity>
 				<Text style={styles.quantityText}>{item.quantity}</Text>
 				<TouchableOpacity
@@ -52,7 +48,7 @@ const renderButton = (item, addClickAction, removeClickAction) => {
 						addClickAction(item);
 					}}
 				>
-					<Ionicons name="ios-add-circle" size={35} color={colors.primary} />
+					<AntDesign name="plussquare" size={30} color={colors.primary} />
 				</TouchableOpacity>
 			</View>
 		);
@@ -112,6 +108,6 @@ const styles = StyleSheet.create({
 	quantityText: {
 		...commonStyles.Text_H5,
 		marginHorizontal: 10,
-		marginTop: 8,
+		marginTop: 5,
 	},
 });

@@ -14,8 +14,10 @@ export default ({ item }) => {
 	return (
 		<TouchableOpacity onPress={onItemSelected}>
 			<View style={styles.container}>
-				<Image source={{ uri: item.iconImage }} style={styles.imageStyle} />
-				<Text style={styles.textStyle}>{item.name}</Text>
+				<View>
+					<Image source={{ uri: item.iconImage }} style={styles.imageStyle} />
+					<Text style={styles.textStyle}>{item.name}</Text>
+				</View>
 			</View>
 		</TouchableOpacity>
 	);
@@ -23,13 +25,18 @@ export default ({ item }) => {
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: colors.primary,
 		alignItems: "center",
 		margin: 10,
 		width: 112,
-		borderWidth: 5,
-		borderColor: colors.primary,
-		borderRadius: 3,
+		shadowColor: colors.black,
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 3.84,
+
+		elevation: 5,
 	},
 	imageStyle: {
 		height: 100,
@@ -39,7 +46,7 @@ const styles = StyleSheet.create({
 	textStyle: {
 		fontSize: 14,
 		fontWeight: "bold",
-		padding: 10,
-		color: "white",
+		paddingTop: 10,
+		color: colors.primary,
 	},
 });
