@@ -1,15 +1,18 @@
 import React, { useContext } from "react";
-import PrimaryToolBar from "../components/PrimaryToolBar";
 import { Context as AuthContext } from "../context/authContext";
 import FavouritesAnonymous from "../components/favourites/FavouritesAnoymous";
 import FavouritesPLP from "../components/favourites/FavouritesPLP";
-import { View } from "react-native";
+import { View, Text } from "react-native";
+import HeaderContainer from "../components/headers/HeaderContainer";
+import { commonStyles } from "../theme";
 
 const FavouritesScreen = () => {
 	const { state } = useContext(AuthContext);
 	return (
 		<View style={{ flex: 1 }}>
-			<PrimaryToolBar title="Favourites" />
+			<HeaderContainer>
+				<Text style={commonStyles.Header_Text}>Favourites</Text>
+			</HeaderContainer>
 			{state.access_token ? <FavouritesPLP /> : <FavouritesAnonymous />}
 		</View>
 	);

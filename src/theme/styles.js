@@ -64,4 +64,9 @@ export default StyleSheet.create({
 	Text_T4: {
 		fontSize: 12,
 	},
+	Header_Text: {
+		fontSize: 16,
+		fontWeight: "bold",
+		color: "white",
+	},
 });
