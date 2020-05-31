@@ -1,17 +1,15 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import SignInScreen from "./src/screens/auth/SignInScreen";
-import RegistrationScreen from "./src/screens/auth/RegistrationScreen";
 import { Provider as AuthProvider } from "./src/context/authContext";
 import { Provider as BasketItemsProvider } from "./src/context/basketItemsContext";
 import { navigationRef } from "./src/navigation/RootNavigation";
+import DrawerNavigation from "./src/navigation/DrawerNavigation";
+import { createStackNavigator } from "@react-navigation/stack";
 import SplashScreen from "./src/screens/SplashScreen";
-import { colors } from "./src/theme";
-import BottomNavigation from "./src/navigation/BottomNavigation";
 
-const Root = createStackNavigator();
 const App = () => {
+	const Root = createStackNavigator();
+
 	return (
 		<Root.Navigator>
 			<Root.Screen
@@ -20,37 +18,9 @@ const App = () => {
 				options={{ headerShown: false }}
 			/>
 			<Root.Screen
-				name="BottomNavigation"
-				component={BottomNavigation}
+				name="Drawer"
+				component={DrawerNavigation}
 				options={{ headerShown: false }}
-			/>
-			<Root.Screen
-				name="SignIn"
-				component={SignInScreen}
-				options={{
-					headerStyle: {
-						backgroundColor: colors.primary,
-					},
-					headerTintColor: colors.primaryBackground,
-					headerTitleStyle: {
-						fontWeight: "bold",
-					},
-					headerBackTitleVisible: false,
-				}}
-			/>
-			<Root.Screen
-				name="Register"
-				component={RegistrationScreen}
-				options={{
-					headerStyle: {
-						backgroundColor: colors.primary,
-					},
-					headerTintColor: colors.primaryBackground,
-					headerTitleStyle: {
-						fontWeight: "bold",
-					},
-					headerBackTitleVisible: false,
-				}}
 			/>
 		</Root.Navigator>
 	);
