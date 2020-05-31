@@ -6,6 +6,8 @@ import { navigationRef } from "./src/navigation/RootNavigation";
 import DrawerNavigation from "./src/navigation/DrawerNavigation";
 import { createStackNavigator } from "@react-navigation/stack";
 import SplashScreen from "./src/screens/SplashScreen";
+import SearchScreen from "./src/screens/SearchScreen";
+import { colors } from "./src/theme";
 
 const App = () => {
 	const Root = createStackNavigator();
@@ -21,6 +23,20 @@ const App = () => {
 				name="Drawer"
 				component={DrawerNavigation}
 				options={{ headerShown: false }}
+			/>
+			<Root.Screen
+				name="Search"
+				component={SearchScreen}
+				options={{
+					headerStyle: {
+						backgroundColor: colors.primary,
+					},
+					headerTintColor: colors.primaryBackground,
+					headerTitleStyle: {
+						fontWeight: "bold",
+					},
+					headerBackTitleVisible: false,
+				}}
 			/>
 		</Root.Navigator>
 	);

@@ -1,16 +1,13 @@
 import React from "react";
 import BrowseList from "../../components/browse/BrowseList";
 import useResults from "../../hooks/useResults";
-import query from "../../graphql/TaxonomyForCategory";
+import query from "../../graphql/TaxonomyDepartments";
+import { commonStyles } from "../../theme";
+import { View, Text } from "react-native";
+import HeaderContainer from "../../components/headers/HeaderContainer";
 
-export default ({ route, navigation }) => {
-	const { _id, id, name } = route.params;
-	navigation.setOptions({ title: name });
-
-	const { loading, error, data } = useResults(query, {
-		id: _id,
-	});
-
+export default ({ navigation }) => {
+	const { loading, error, data } = useResults(query);
 	const onItemSelected = (item) => {
 		navigation.navigate("Aisle", {
 			_id: item._id,
@@ -18,12 +15,18 @@ export default ({ route, navigation }) => {
 			name: item.name,
 		});
 	};
+	console.log(data);
 	return (
-		<BrowseList
-			results={data ? data.data.subcategories : []}
-			onItemSelected={onItemSelected}
-			isLoading={loading}
-			isError={error}
-		/>
+		<View>
+			<HeaderContainer>
+				<Text style={commonStyles.Header_Text}>Shop by caterory</Text>
+			</HeaderContainer>
+			<BrowseList
+				results={data ? data.data.departments : null}
+				onItemSelected={onItemSelected}
+				isLoading={loading}
+				isError={error}
+			/>
+		</View>
 	);
 };

@@ -17,11 +17,6 @@ export default () => {
 				}}
 			/>
 			<Stack.Screen
-				name="Browse"
-				component={BrowseStack}
-				options={{ headerShown: false }}
-			/>
-			<Stack.Screen
 				name="Account"
 				component={AccountsScreen}
 				options={{

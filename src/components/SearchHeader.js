@@ -41,7 +41,9 @@ export default () => {
 			<SearchBar
 				placeholder="Search for a product"
 				onChangeText={setTerm}
-				onSubmitEditing={() => lazyFetchResults({ query: term })}
+				onSubmitEditing={() =>
+					navigation.navigate("Search", { searchTerm: term })
+				}
 				value={term}
 				containerStyle={styles.searchContainer}
 				inputContainerStyle={styles.searchInputContainer}

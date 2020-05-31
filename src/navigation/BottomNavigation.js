@@ -4,14 +4,13 @@ import {
 	MaterialCommunityIcons,
 	Feather,
 	SimpleLineIcons,
-	Ionicons,
 } from "@expo/vector-icons";
 import FavouritesScreen from "../screens/FavouritesScreen";
 import OrdersScreen from "../screens/OrdersScreen";
 import BasketScreen from "../screens/BasketScreen";
-import SearchScreen from "../screens/SearchScreen";
 import HomeStack from "./HomeStack";
 import { colors } from "../theme";
+import BrowseStack from "./BrowseStack";
 
 const Tab = createBottomTabNavigator();
 const BottomNavigation = () => {
@@ -36,6 +35,15 @@ const BottomNavigation = () => {
 				}}
 			/>
 			<Tab.Screen
+				name="Categories"
+				component={BrowseStack}
+				options={{
+					tabBarIcon: ({ color }) => (
+						<SimpleLineIcons name="grid" size={22} color={color} />
+					),
+				}}
+			/>
+			<Tab.Screen
 				name="Favourites"
 				component={FavouritesScreen}
 				options={{
@@ -45,15 +53,6 @@ const BottomNavigation = () => {
 							size={25}
 							color={color}
 						/>
-					),
-				}}
-			/>
-			<Tab.Screen
-				name="Search"
-				component={SearchScreen}
-				options={{
-					tabBarIcon: ({ color }) => (
-						<Ionicons name="md-search" size={28} color={color} />
 					),
 				}}
 			/>

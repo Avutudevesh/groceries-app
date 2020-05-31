@@ -6,8 +6,8 @@ import { useNavigation } from "@react-navigation/native";
 export default ({ item }) => {
 	const navigation = useNavigation();
 	const onItemSelected = () => {
-		navigation.navigate("Browse", {
-			screen: "Department",
+		navigation.navigate("Categories", {
+			screen: "Aisle",
 			params: { _id: item._id, id: item.id, name: item.name },
 		});
 	};

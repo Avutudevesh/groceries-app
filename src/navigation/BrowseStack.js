@@ -1,9 +1,9 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import SuperDepartmentScreen from "../screens/browse/SuperDepartmentsScreen";
 import DepartmentScreen from "../screens/browse/DepartmentScreen";
 import AisleScreen from "../screens/browse/AisleScreen";
-import AislePLPScreen from "../screens/browse/AislePLPScreen";
+import ShelfScreen from "../screens/browse/ShelfScreen";
+import ShelfPLPScreen from "../screens/browse/ShelfPLPScreen";
 import { colors } from "../theme";
 
 export default () => {
@@ -11,14 +11,9 @@ export default () => {
 	return (
 		<Stack.Navigator>
 			<Stack.Screen
-				name="SuperDepartment"
-				component={SuperDepartmentScreen}
-				options={browseScreensOptions}
-			/>
-			<Stack.Screen
 				name="Department"
 				component={DepartmentScreen}
-				options={browseScreensOptions}
+				options={{ headerShown: false }}
 			/>
 			<Stack.Screen
 				name="Aisle"
@@ -26,8 +21,13 @@ export default () => {
 				options={browseScreensOptions}
 			/>
 			<Stack.Screen
-				name="AislePLP"
-				component={AislePLPScreen}
+				name="Shelf"
+				component={ShelfScreen}
+				options={browseScreensOptions}
+			/>
+			<Stack.Screen
+				name="ShelfPLP"
+				component={ShelfPLPScreen}
 				options={browseScreensOptions}
 			/>
 		</Stack.Navigator>

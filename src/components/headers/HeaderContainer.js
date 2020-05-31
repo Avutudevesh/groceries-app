@@ -5,7 +5,6 @@ import { colors } from "../../theme";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { EvilIcons } from "@expo/vector-icons";
 
 export default (props) => {
 	const navigation = useNavigation();
@@ -35,7 +34,9 @@ export default (props) => {
 			<SearchBar
 				placeholder="Search for a product"
 				onChangeText={setTerm}
-				onSubmitEditing={() => lazyFetchResults({ query: term })}
+				onSubmitEditing={() =>
+					navigation.navigate("Search", { searchTerm: term })
+				}
 				value={term}
 				containerStyle={styles.searchContainer}
 				inputContainerStyle={styles.searchInputContainer}

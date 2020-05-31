@@ -7,14 +7,13 @@ import { commonStyles, colors } from "../theme";
 import useResults from "../hooks/useResults";
 import query from "../graphql/SearchProduct";
 
-const SearchScreen = () => {
+const SearchScreen = ({ route }) => {
+	const { searchTerm } = route.params;
 	const { mergeLocalAttributes } = useContext(BasketContext);
-	const [term, setTerm] = useState("");
-	const { loading, error, data, lazyFetchResults } = useResults(
-		query,
-		null,
-		true
-	);
+	const [term, setTerm] = useState(searchTerm);
+	const { loading, error, data, lazyFetchResults } = useResults(query, {
+		query: searchTerm,
+	});
 	const initialScreen = () => (
 		<View style={styles.searchEmptyContainer}>
 			<Text style={styles.searchHeading}>Search Groceries</Text>
@@ -45,14 +44,12 @@ const SearchScreen = () => {
 	);
 };
 
-const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 50 : StatusBar.currentHeight;
-
 const styles = StyleSheet.create({
 	searchContainer: {
 		backgroundColor: colors.primary,
 		paddingHorizontal: 20,
-		paddingTop: STATUSBAR_HEIGHT,
 		borderWidth: 0,
+		borderTopWidth: 0,
 	},
 	searchInputContainer: {
 		backgroundColor: colors.primaryBackground,
