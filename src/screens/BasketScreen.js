@@ -11,7 +11,7 @@ const BasketScreen = () => {
 	return (
 		<View style={{ flex: 1 }}>
 			<HeaderContainer>
-				<Text style={commonStyles.Header_Text}>Favourites</Text>
+				<Text style={commonStyles.Header_Text}>Basket</Text>
 			</HeaderContainer>
 			{state.access_token ? <BasketPLP /> : <BasketAnonymous />}
 		</View>

@@ -1,9 +1,21 @@
 import React from "react";
 import { View, FlatList, ActivityIndicator, StyleSheet } from "react-native";
 import ProductCard from "./ProductCard";
+import EmptyState from "./EmptyState";
 
-export default ({ productItems, isLoading, isError }) => {
+export default ({
+	productItems,
+	isLoading,
+	isError,
+	emptyStateTitle = "No products at the moment",
+	emptyStateSubTitle = "Please check back later to find more.",
+}) => {
 	const setContent = () => {
+		if (productItems.length === 0) {
+			return (
+				<EmptyState title={emptyStateTitle} subTitle={emptyStateSubTitle} />
+			);
+		}
 		return (
 			<FlatList
 				data={productItems}

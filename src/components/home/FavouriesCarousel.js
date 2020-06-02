@@ -22,6 +22,8 @@ export default () => {
 			productItems={data ? mergeLocalAttributes(state.favourites) : []}
 			isError={error}
 			isLoading={loading}
+			emptyStateTitle="No favourites"
+			emptyStateSubTitle="Add to your favourites list by click on heart icon next to a product."
 		/>
 	);
 };

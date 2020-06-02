@@ -8,9 +8,22 @@ import {
 } from "react-native";
 import ProductCardVertical from "./ProductCardVertical";
 import { commonStyles, colors } from "../theme";
+import EmptyState from "./EmptyState";
 
-export default ({ title, productItems, isLoading, isError }) => {
+export default ({
+	title,
+	productItems,
+	isLoading,
+	isError,
+	emptyStateTitle,
+	emptyStateSubTitle,
+}) => {
 	const setContent = () => {
+		if (productItems.length === 0) {
+			return (
+				<EmptyState title={emptyStateTitle} subTitle={emptyStateSubTitle} />
+			);
+		}
 		return (
 			<FlatList
 				horizontal
