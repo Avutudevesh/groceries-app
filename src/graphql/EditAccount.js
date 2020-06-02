@@ -1,6 +1,6 @@
-const query = `mutation CreateUser(
+const query = `
+mutation EditAccount(
     $email:String!,
-    $password:String!,
     $name:String!,
     $phone:String!,
     $addressline1:String!,
@@ -10,9 +10,8 @@ const query = `mutation CreateUser(
     $state:String!
     
   ){
-    createUser(userInput:{
+    editAccountDetails(accountInput:{
       email:$email,
-      password:$password,
       name:$name,
       phone:$phone,
       address:{
@@ -23,23 +22,19 @@ const query = `mutation CreateUser(
         state:$state
       }
     }){
-      userId,
-      token,
-      tokenExpiration,
-      account{
-        _id,
-        email,
-        name,
-        phone,
-        address{
-          line1,
-          line2,
-          city,
-          state,
-          pincode
-        }
+      _id,
+      email,
+      name,
+      phone,
+      address{
+        line1,
+        line2,
+        city,
+        state,
+        pincode
       }
     }
-  }`;
+  }
+`;
 
 export default query;

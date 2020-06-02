@@ -9,12 +9,13 @@ const authReducer = (state, action) => {
 	switch (action.type) {
 		case "signin_success":
 			return {
-				access_token: action.payload,
+				access_token: action.payload.token,
+				account: action.payload.account,
 				signin_inprogress: false,
 				signin_error: false,
 			};
 		case "signout":
-			return { ...state, access_token: null };
+			return { ...state, access_token: null, account: null };
 		case "signin":
 			return { ...state, signin_inprogress: true };
 		case "signin_error":
@@ -57,9 +58,13 @@ const registerUser = (dispatch) => async ({
 			"access_token",
 			response.data.data.createUser.token
 		);
+		await AsyncStorage.setItem(
+			"account",
+			JSON.stringify(response.data.data.createUser.account)
+		);
 		dispatch({
 			type: "signin_success",
-			payload: response.data.data.createUser.token,
+			payload: response.data.data.createUser,
 		});
 		navigate("BottomNavigation");
 	} catch (err) {
@@ -80,9 +85,13 @@ const signin = (dispatch) => async (email, password) => {
 		});
 		console.log(response.data.data.login.token);
 		await AsyncStorage.setItem("access_token", response.data.data.login.token);
+		await AsyncStorage.setItem(
+			"account",
+			JSON.stringify(response.data.data.login.account)
+		);
 		dispatch({
 			type: "signin_success",
-			payload: response.data.data.login.token,
+			payload: response.data.data.login,
 		});
 		navigate("BottomNavigation");
 	} catch (e) {
@@ -100,12 +109,19 @@ const signout = (dispatch) => async () => {
 
 const tryLocalSignIn = (dispatch) => async () => {
 	const token = await AsyncStorage.getItem("access_token");
-	dispatch({ type: "signin_success", payload: token });
+	const accountJson = await AsyncStorage.getItem("account");
+	const account = JSON.parse(accountJson);
+	dispatch({ type: "signin_success", payload: { token, account } });
 	navigate("Drawer");
 };
 
 export const { Context, Provider } = createDataContext(
 	authReducer,
 	{ signin, signout, tryLocalSignIn, registerUser },
-	{ access_token: null, signin_inprogress: false, signin_error: false }
+	{
+		access_token: null,
+		signin_inprogress: false,
+		signin_error: false,
+		account: null,
+	}
 );
