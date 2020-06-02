@@ -6,7 +6,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export default (props) => {
+export default ({ children, searchShown = true }) => {
 	const navigation = useNavigation();
 	const [term, setTerm] = useState("");
 	return (
@@ -20,7 +20,7 @@ export default (props) => {
 						style={styles.iconStyle}
 					/>
 				</TouchableOpacity>
-				{props.children}
+				{children}
 				<TouchableOpacity onPress={() => navigation.navigate("Account")}>
 					<MaterialCommunityIcons
 						name="account"
@@ -30,21 +30,22 @@ export default (props) => {
 					/>
 				</TouchableOpacity>
 			</View>
-
-			<SearchBar
-				placeholder="Search for a product"
-				onChangeText={setTerm}
-				onSubmitEditing={() =>
-					navigation.navigate("Search", { searchTerm: term })
-				}
-				value={term}
-				containerStyle={styles.searchContainer}
-				inputContainerStyle={styles.searchInputContainer}
-				placeholderTextColor={colors.textInputPlaceholderColor}
-				inputStyle={{ color: colors.textInputPlaceholderColor }}
-				autoCapitalize="none"
-				autoCorrect={false}
-			/>
+			{searchShown && (
+				<SearchBar
+					placeholder="Search for a product"
+					onChangeText={setTerm}
+					onSubmitEditing={() =>
+						navigation.navigate("Search", { searchTerm: term })
+					}
+					value={term}
+					containerStyle={styles.searchContainer}
+					inputContainerStyle={styles.searchInputContainer}
+					placeholderTextColor={colors.textInputPlaceholderColor}
+					inputStyle={{ color: colors.textInputPlaceholderColor }}
+					autoCapitalize="none"
+					autoCorrect={false}
+				/>
+			)}
 		</View>
 	);
 };

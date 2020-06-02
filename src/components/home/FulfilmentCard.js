@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Button from "../Button";
 import { colors, commonStyles } from "../../theme";
+import { Context as AuthContext } from "../../context/authContext";
 
 export default () => {
+	const { state } = useContext(AuthContext);
 	return (
 		<View style={styles.container}>
-			<Text style={styles.headingText}>Hello Devesh.</Text>
+			<Text style={styles.headingText}>Hello {state.account.name}.</Text>
 			<Text style={styles.subHeadingText}>
 				Checkout your order now to get this slot.
 			</Text>

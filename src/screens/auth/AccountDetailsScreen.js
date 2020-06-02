@@ -1,43 +1,43 @@
-import React, { useReducer, useContext } from "react";
+import React, { useContext, useReducer } from "react";
 import {
 	View,
 	Text,
-	TextInput,
 	StyleSheet,
-	ScrollView,
+	TextInput,
 	ActivityIndicator,
 } from "react-native";
-import { colors, commonStyles } from "../../theme";
-import Button from "../../components/Button";
-import { Context as AuthContext } from "../../context/authContext";
-import Dialog, { DialogContent } from "react-native-popup-dialog";
 import AccountDetailsForm from "../../components/auth/AccountDetailsForm";
+import { Context as AuthContext } from "../../context/authContext";
+import { commonStyles, colors } from "../../theme";
+import HeaderContainer from "../../components/headers/HeaderContainer";
+import Button from "../../components/Button";
+import Dialog, { DialogContent } from "react-native-popup-dialog";
 
 export default () => {
 	const {
-		state: { signin_inprogress, signin_error },
-		registerUser,
+		state: { account, account_update_inprogress, account_update_error },
+		editAccount,
 	} = useContext(AuthContext);
 	const reducer = (state, action) => {
-		console.log(action);
 		return { ...state, ...action };
 	};
 	const [formState, dispatch] = useReducer(reducer, {
-		email: "",
-		password: "",
-		name: "",
-		phone: "",
-		addrline1: "",
-		addrline2: "",
-		city: "",
-		state: "",
-		pincode: "",
+		email: account.email,
+		name: account.name,
+		phone: account.phone,
+		addrline1: account.address.line1,
+		addrline2: account.address.line2,
+		city: account.address.city,
+		state: account.address.state,
+		pincode: account.address.pincode,
 	});
 	return (
-		<View style={styles.container}>
-			<ScrollView>
-				<Text style={styles.title}>Create your account</Text>
-				<Text style={styles.sectionHeading}>Account details</Text>
+		<View>
+			<HeaderContainer searchShown={false}>
+				<Text style={styles.headerText}>Account Details</Text>
+			</HeaderContainer>
+			<View style={styles.container}>
+				<Text style={styles.title}>Account Details</Text>
 				<TextInput
 					value={formState.email}
 					placeholder="Email address*"
@@ -47,18 +47,8 @@ export default () => {
 					autoCorrect={false}
 					onChangeText={(value) => dispatch({ email: value })}
 				/>
-				<TextInput
-					value={formState.password}
-					secureTextEntry={true}
-					placeholder="Create a password*"
-					style={styles.inputField}
-					placeholderTextColor={colors.textInputPlaceholderColor}
-					autoCapitalize="none"
-					autoCorrect={false}
-					onChangeText={(value) => dispatch({ password: value })}
-				/>
 				<AccountDetailsForm formState={formState} dispatch={dispatch} />
-				{signin_error && (
+				{account_update_error && (
 					<Text style={styles.errorText}>
 						Sorry something went wrong please try again.
 					</Text>
@@ -66,15 +56,15 @@ export default () => {
 				<Button
 					buttonStyle={commonStyles.PrimaryButton}
 					textStyle={commonStyles.PrimaryButtonText}
-					text="Create account"
-					onClick={() => registerUser(formState)}
+					text="Edit account"
+					onClick={() => editAccount(formState)}
 				/>
-				<Dialog visible={signin_inprogress}>
+				<Dialog visible={account_update_inprogress}>
 					<DialogContent style={{ paddingVertical: 20 }}>
 						<ActivityIndicator />
 					</DialogContent>
 				</Dialog>
-			</ScrollView>
+			</View>
 		</View>
 	);
 };
@@ -85,14 +75,14 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		marginBottom: 10,
 	},
-	sectionHeading: {
-		...commonStyles.Text_H5,
-		marginBottom: 5,
-	},
 	container: {
 		backgroundColor: "white",
 		paddingVertical: 40,
 		paddingHorizontal: 20,
+	},
+	headerText: {
+		...commonStyles.Header_Text,
+		paddingBottom: 20,
 	},
 	inputField: {
 		height: 50,
@@ -101,11 +91,6 @@ const styles = StyleSheet.create({
 		marginVertical: 10,
 		borderWidth: 1,
 		paddingLeft: 10,
-	},
-	linkText: {
-		...commonStyles.Text_H5,
-		color: colors.primary,
-		marginVertical: 25,
 	},
 	errorText: {
 		color: "red",

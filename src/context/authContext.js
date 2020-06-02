@@ -4,6 +4,7 @@ import createDataContext from "./createDataContext";
 import navigate from "../navigation/RootNavigation";
 import authenticationQuery from "../graphql/Authenticate";
 import createUserQuery from "../graphql/CreateUser";
+import editAccountQuery from "../graphql/EditAccount";
 
 const authReducer = (state, action) => {
 	switch (action.type) {
@@ -20,6 +21,20 @@ const authReducer = (state, action) => {
 			return { ...state, signin_inprogress: true };
 		case "signin_error":
 			return { ...state, signin_inprogress: false, signin_error: true };
+		case "account_details":
+			return {
+				...state,
+				account: action.payload,
+				account_update_inprogress: false,
+			};
+		case "account_loading":
+			return { ...state, account_update_inprogress: true };
+		case "account_error":
+			return {
+				...state,
+				account_update_inprogress: false,
+				account_update_error: true,
+			};
 		default:
 			return state;
 	}
@@ -28,8 +43,7 @@ const authReducer = (state, action) => {
 const registerUser = (dispatch) => async ({
 	email,
 	password,
-	firstName,
-	lastName,
+	name,
 	phone,
 	addrline1,
 	addrline2,
@@ -44,7 +58,7 @@ const registerUser = (dispatch) => async ({
 			variables: {
 				email,
 				password,
-				name: firstName + " " + lastName,
+				name,
 				phone,
 				addressline1: addrline1,
 				addressline2: addrline2,
@@ -53,7 +67,6 @@ const registerUser = (dispatch) => async ({
 				state,
 			},
 		});
-		console.log(response.data.data.createUser.token);
 		await AsyncStorage.setItem(
 			"access_token",
 			response.data.data.createUser.token
@@ -69,6 +82,46 @@ const registerUser = (dispatch) => async ({
 		navigate("BottomNavigation");
 	} catch (err) {
 		dispatch({ type: "signin_error" });
+		console.log(err);
+	}
+};
+
+const editAccount = (dispatch) => async ({
+	email,
+	name,
+	phone,
+	addrline1,
+	addrline2,
+	city,
+	state,
+	pincode,
+}) => {
+	try {
+		dispatch({ type: "account_loading" });
+		const response = await mangoApi.post("/", {
+			query: editAccountQuery,
+			variables: {
+				email,
+				name,
+				phone,
+				addressline1: addrline1,
+				addressline2: addrline2,
+				pincode,
+				city,
+				state,
+			},
+		});
+		await AsyncStorage.setItem(
+			"account",
+			JSON.stringify(response.data.data.editAccountDetails)
+		);
+		dispatch({
+			type: "account_details",
+			payload: response.data.data.editAccountDetails,
+		});
+		navigate("HomeScreen");
+	} catch (err) {
+		dispatch({ type: "account_error" });
 		console.log(err);
 	}
 };
@@ -117,11 +170,13 @@ const tryLocalSignIn = (dispatch) => async () => {
 
 export const { Context, Provider } = createDataContext(
 	authReducer,
-	{ signin, signout, tryLocalSignIn, registerUser },
+	{ signin, signout, tryLocalSignIn, registerUser, editAccount },
 	{
 		access_token: null,
 		signin_inprogress: false,
 		signin_error: false,
 		account: null,
+		account_update_inprogress: false,
+		account_update_error: false,
 	}
 );
