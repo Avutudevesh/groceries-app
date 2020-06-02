@@ -42,6 +42,8 @@ export default (props) => {
 				inputContainerStyle={styles.searchInputContainer}
 				placeholderTextColor={colors.textInputPlaceholderColor}
 				inputStyle={{ color: colors.textInputPlaceholderColor }}
+				autoCapitalize="none"
+				autoCorrect={false}
 			/>
 		</View>
 	);

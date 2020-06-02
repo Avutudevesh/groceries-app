@@ -1,15 +1,35 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Text, Image, View, StyleSheet, TouchableOpacity } from "react-native";
 import Button from "../components/Button";
-import { Ionicons } from "@expo/vector-icons";
 import { Context as BasketContext } from "../context/basketItemsContext";
+import { Context as FavouritesContext } from "../context/favouritesContext";
 import { colors, commonStyles } from "../theme";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import FavouritesModal from "./FavouritesModal";
 
 export default ({ productItem }) => {
 	const { addItemToBasket, removeItemFromBasket } = useContext(BasketContext);
+	const {
+		state,
+		isItemInFavourites,
+		addToFavourites,
+		removeFromFavourites,
+	} = useContext(FavouritesContext);
+	const [modalVisibility, setModalVisibility] = useState(false);
+	const [isFavouriteItem, setIsFavouriteItem] = useState(false);
+	useEffect(() => {
+		setIsFavouriteItem(isItemInFavourites(productItem.product._id));
+	}, [state]);
 	return (
 		<View style={styles.container}>
+			<FavouritesModal
+				setModalVisibility={setModalVisibility}
+				visible={modalVisibility}
+				addToFavourites={addToFavourites}
+				removeFromFavourites={removeFromFavourites}
+				isFavouriteItem={isFavouriteItem}
+				item={productItem.product}
+			/>
 			<Image
 				source={{
 					uri: productItem.product.imageUrl,
@@ -36,6 +56,14 @@ export default ({ productItem }) => {
 					{renderButton(productItem, addItemToBasket, removeItemFromBasket)}
 				</View>
 			</View>
+			<TouchableOpacity onPress={() => setModalVisibility(true)}>
+				<MaterialIcons
+					name={isFavouriteItem ? "favorite" : "favorite-border"}
+					size={24}
+					color={colors.primary}
+					style={{ marginHorizontal: 5, alignItems: "flex-end" }}
+				/>
+			</TouchableOpacity>
 		</View>
 	);
 };

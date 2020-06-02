@@ -1,20 +1,50 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Text, Image, View, StyleSheet, TouchableOpacity } from "react-native";
 import Button from "./Button";
 import { Context as BasketContext } from "../context/basketItemsContext";
+import { Context as FavouritesContext } from "../context/favouritesContext";
 import { colors, commonStyles } from "../theme";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import FavouritesModal from "./FavouritesModal";
 
 export default ({ item }) => {
+	const {
+		state,
+		isItemInFavourites,
+		addToFavourites,
+		removeFromFavourites,
+	} = useContext(FavouritesContext);
+	const [modalVisibility, setModalVisibility] = useState(false);
 	const { addItemToBasket, removeItemFromBasket } = useContext(BasketContext);
+	const [isFavouriteItem, setIsFavouriteItem] = useState(false);
+	useEffect(() => {
+		setIsFavouriteItem(isItemInFavourites(item.product._id));
+	}, [state]);
 	return (
 		<View style={styles.container}>
-			<Image
-				source={{
-					uri: item.product.imageUrl,
-				}}
-				style={styles.imageStyle}
+			<FavouritesModal
+				setModalVisibility={setModalVisibility}
+				visible={modalVisibility}
+				addToFavourites={addToFavourites}
+				removeFromFavourites={removeFromFavourites}
+				isFavouriteItem={isFavouriteItem}
+				item={item.product}
 			/>
+			<View style={{ flexDirection: "row" }}>
+				<Image
+					source={{
+						uri: item.product.imageUrl,
+					}}
+					style={styles.imageStyle}
+				/>
+				<TouchableOpacity onPress={() => setModalVisibility(true)}>
+					<MaterialIcons
+						name={isFavouriteItem ? "favorite" : "favorite-border"}
+						size={24}
+						color={colors.primary}
+					/>
+				</TouchableOpacity>
+			</View>
 			<View>
 				<Text
 					style={styles.productTitle}
@@ -89,7 +119,6 @@ const styles = StyleSheet.create({
 	imageStyle: {
 		height: 100,
 		width: 100,
-		marginHorizontal: 15,
 		marginBottom: 10,
 	},
 	priceViewStyle: {
@@ -102,8 +131,7 @@ const styles = StyleSheet.create({
 	buttonsContainer: {
 		flex: 1,
 		flexDirection: "row",
-		justifyContent: "space-evenly",
-		alignContent: "center",
+		justifyContent: "center",
 	},
 	quantityText: {
 		...commonStyles.Text_H5,

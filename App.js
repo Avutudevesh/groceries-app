@@ -2,6 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider as AuthProvider } from "./src/context/authContext";
 import { Provider as BasketItemsProvider } from "./src/context/basketItemsContext";
+import { Provider as FavouritesProvider } from "./src/context/favouritesContext";
 import { navigationRef } from "./src/navigation/RootNavigation";
 import DrawerNavigation from "./src/navigation/DrawerNavigation";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -46,9 +47,11 @@ export default () => {
 	return (
 		<NavigationContainer ref={navigationRef}>
 			<BasketItemsProvider>
-				<AuthProvider>
-					<App />
-				</AuthProvider>
+				<FavouritesProvider>
+					<AuthProvider>
+						<App />
+					</AuthProvider>
+				</FavouritesProvider>
 			</BasketItemsProvider>
 		</NavigationContainer>
 	);

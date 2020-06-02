@@ -15,7 +15,6 @@ export default ({ navigation }) => {
 			name: item.name,
 		});
 	};
-	console.log(data);
 	return (
 		<View>
 			<HeaderContainer>

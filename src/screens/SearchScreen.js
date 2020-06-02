@@ -38,6 +38,8 @@ const SearchScreen = ({ route }) => {
 				inputContainerStyle={styles.searchInputContainer}
 				placeholderTextColor={colors.textInputPlaceholderColor}
 				inputStyle={{ color: colors.textInputPlaceholderColor }}
+				autoCapitalize="none"
+				autoCorrect={false}
 			/>
 			{data != null || loading ? searchProductsScreen() : initialScreen()}
 		</View>
