@@ -42,7 +42,7 @@ export default ({ productItem }) => {
 					numberOfLines={2}
 					ellipsizeMode="tail"
 				>
-					{productItem.product.title}
+					{productItem.product.title.replace("Grofers", "")}
 				</Text>
 				<View style={styles.priceViewStyle}>
 					<View>

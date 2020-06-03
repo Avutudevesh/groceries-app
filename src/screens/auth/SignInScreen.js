@@ -11,15 +11,17 @@ import Button from "../../components/Button";
 import { Context as AuthContext } from "../../context/authContext";
 import Dialog, { DialogContent } from "react-native-popup-dialog";
 import { commonStyles, colors } from "../../theme";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default () => {
+export default ({ navigation }) => {
 	const { state, signin } = useContext(AuthContext);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	return (
 		<View style={styles.container}>
-			<Image source={require("../../../assets/tesco_logo.png")} />
-			<Text style={styles.linkText}>New to Tesco? Register here</Text>
+			<TouchableOpacity onPress={() => navigation.navigate("Register")}>
+				<Text style={styles.linkText}>New to the App? Register here</Text>
+			</TouchableOpacity>
 			<TextInput
 				value={email}
 				placeholder="Email Address"
