@@ -1,7 +1,7 @@
 {
 	"expo": {
-		"name": "Grocery Shopping",
-		"slug": "grocery_shopping",
+		"name": "Groceries App",
+		"slug": "groceries_app",
 		"platforms": ["ios", "android", "web"],
 		"version": "1.0.0",
 		"orientation": "portrait",
@@ -27,7 +27,7 @@
 			}
 		},
 		"android": {
-			"package": "com.devesh.grocery"
+			"package": "com.groceries.shop"
 		}
 	}
 }
