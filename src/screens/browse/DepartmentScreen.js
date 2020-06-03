@@ -16,7 +16,7 @@ export default ({ navigation }) => {
 		});
 	};
 	return (
-		<View>
+		<View style={{ flex: 1 }}>
 			<HeaderContainer>
 				<Text style={commonStyles.Header_Text}>Shop by caterory</Text>
 			</HeaderContainer>

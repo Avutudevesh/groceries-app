@@ -23,7 +23,7 @@ export default ({ title, subTitle }) => {
 				textStyle={commonStyles.SecondaryButtonText}
 				text="Register"
 				onClick={() => {
-					navigation.navigate("SignIn");
+					navigation.navigate("Register");
 				}}
 			/>
 		</View>

@@ -4,9 +4,8 @@ import colors from "./colors";
 export default StyleSheet.create({
 	PrimaryButton: {
 		paddingVertical: 12,
-		paddingHorizontal: 100,
+		paddingHorizontal: 80,
 		marginVertical: 5,
-		marginHorizontal: 10,
 		backgroundColor: colors.primary,
 		borderRadius: 10,
 		borderWidth: 2,
@@ -21,7 +20,7 @@ export default StyleSheet.create({
 		paddingVertical: 12,
 		marginHorizontal: 10,
 		marginVertical: 5,
-		paddingHorizontal: 100,
+		paddingHorizontal: 80,
 		backgroundColor: colors.primaryBackground,
 		borderRadius: 10,
 		borderWidth: 2,

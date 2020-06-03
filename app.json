@@ -1,33 +1,41 @@
 {
-	"expo": {
-		"name": "Groceries App",
-		"slug": "groceries_app",
-		"platforms": ["ios", "android", "web"],
-		"version": "1.0.0",
-		"orientation": "portrait",
-		"icon": "./assets/icon.png",
-		"splash": {
-			"image": "./assets/splash.png",
-			"resizeMode": "contain",
-			"backgroundColor": "#ffffff"
-		},
-		"updates": {
-			"fallbackToCacheTimeout": 0
-		},
-		"assetBundlePatterns": ["**/*"],
-		"ios": {
-			"supportsTablet": true
-		},
-		"description": "",
-		"web": {
-			"build": {
-				"babel": {
-					"include": ["static-container"]
-				}
-			}
-		},
-		"android": {
-			"package": "com.groceries.shop"
-		}
-	}
+  "expo": {
+    "name": "Groceries App",
+    "slug": "groceries_app",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "description": "",
+    "web": {
+      "build": {
+        "babel": {
+          "include": [
+            "static-container"
+          ]
+        }
+      }
+    },
+    "android": {
+      "package": "com.groceries.shop"
+    }
+  }
 }

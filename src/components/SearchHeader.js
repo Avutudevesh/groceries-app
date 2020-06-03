@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import {
+	View,
+	StyleSheet,
+	TouchableOpacity,
+	Text,
+	StatusBar,
+} from "react-native";
 import { SearchBar } from "react-native-elements";
 import { colors } from "../theme";
 import { FontAwesome } from "@expo/vector-icons";

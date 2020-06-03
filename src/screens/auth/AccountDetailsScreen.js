@@ -15,9 +15,19 @@ import Dialog, { DialogContent } from "react-native-popup-dialog";
 
 export default () => {
 	const {
-		state: { account, account_update_inprogress, account_update_error },
+		state: { token, account, account_update_inprogress, account_update_error },
 		editAccount,
 	} = useContext(AuthContext);
+	if (!token) {
+		return (
+			<View>
+				<HeaderContainer searchShown={false}>
+					<Text style={styles.headerText}>Account Details</Text>
+				</HeaderContainer>
+				<Text>Login to view account details</Text>
+			</View>
+		);
+	}
 	const reducer = (state, action) => {
 		return { ...state, ...action };
 	};

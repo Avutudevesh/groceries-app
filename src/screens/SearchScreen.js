@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Text, View, StyleSheet, Platform, StatusBar } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import PLPList from "../components/PLPList";
 import { Context as BasketContext } from "../context/basketItemsContext";
 import { SearchBar } from "react-native-elements";
