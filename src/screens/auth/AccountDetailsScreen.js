@@ -15,10 +15,15 @@ import Dialog, { DialogContent } from "react-native-popup-dialog";
 
 export default () => {
 	const {
-		state: { token, account, account_update_inprogress, account_update_error },
+		state: {
+			access_token,
+			account,
+			account_update_inprogress,
+			account_update_error,
+		},
 		editAccount,
 	} = useContext(AuthContext);
-	if (!token) {
+	if (!access_token) {
 		return (
 			<View>
 				<HeaderContainer searchShown={false}>
